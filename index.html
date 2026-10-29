@@ -140,7 +140,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
   </header>
   <nav class="toc" id="innehall" aria-label="Innehåll"></nav>
   <main id="main"></main>
-  <p class="foot">Modellerna är förenklade och inte skalenliga. De överkryssade styckena i boken (moränbacklandskap, moränryggar och israndbildningar) är inte med.</p>
+  <p class="foot">Modellerna är förenklade och inte skalenliga.</p>
 </div>
 
 <script>
@@ -802,6 +802,35 @@ draw(s){const t=s.t/100,top=lerp(60,252,t);let o=R(0,0,600,320,'sky')+R(0,250,60
  o+=R(470,12,120,74,'panel',{rx:6,s:'line',w:1})+PA('M510 49 L510 25 A24 24 0 1 1 486 49Z','moran')+C(510,49,24,null,{s:'ink',w:1})+T(545,46,'3/4',{b:1,size:14})+T(545,62,'av Sverige',{size:10});
  return{svg:o,note:t<.95?'Isen smälter uppifrån. Stenar och block av alla storlekar faller ner <b>huller om buller</b> – osorterat och kantigt.':'Kvar är ett jordtäcke av <b>morän</b>. Där växer främst tall- och granskog.'}}});
 
+/* 35b Moränbacklandskap och moränryggar */
+add({id:'moranbacklandskap',ch:3,title:'Moränbacklandskap och moränryggar',pages:'s. 95',
+controls:[{k:'m',type:'seg',label:'Typ',val:'back',opts:[['back','Moränbacklandskap'],['rygg','Moränryggar'],['geer','De Geer-moräner']]},{k:'t',label:'Isen smälter',min:0,max:100,val:35,fmt:pct,play:1}],
+facts:['<b>Moränbacklandskap</b> är en typ av morän med oregelbundna <b>kullar, sjöar och torvmarker</b>.','Det anses ha bildats när isens rörelse avtog och stora områden smälte av som <b>dödis</b>, alltså isar som inte längre hängde ihop med den stora inlandsisen.','Moränbacklandskap är vanliga bland annat i <b>södra Småland, Dalarna och Härjedalen</b>.','Där mycket material smälte fram vid kanten av inlandsisen bildades avlånga <b>moränryggar</b> längs med isens kant. De kan vara <b>några meter höga</b> och <b>ett par hundra meter långa</b>.','Moränryggar syns tydligt mitt i odlingslandskapet, där de sticker upp i åkern eftersom man <b>inte kan odla på dem</b>.','Nära öppna vatten, t.ex. <b>Mälardalen</b> och <b>Västerbottens kustland</b>, finns hela svärmar av moränryggar. De bildades i vatten nära iskanten och kallas <b>de Geer-moräner</b> efter den svenske geologen <b>Gerard de Geer</b>.'],
+draw(s){const t=s.t/100;let o='';
+ if(s.m==='back'){const H=[120,295,460];
+  const g=X=>226-16*Math.sin(X/37)-10*Math.sin(X/17+1)-6*Math.sin(X/9+2)+H.reduce((a,c)=>a+34*G((X-c)/42),0);
+  o+=R(0,0,600,320,'sky')+PG([...curve(g,0,600,4),[600,320],[0,320]],'moran')+R(0,296,600,24,'rock');
+  const sheet=1-sm(0,.2,t);if(sheet>0)o+=PG([...curve(X=>g(X)-90-10*Math.sin(X/60),0,600,6),...curve(g,0,600,6).reverse()],'ice',{op:.9*sheet,s:'cold',w:1});
+  const hb=70*(1-sm(.15,.85,t)),r=rng(41);
+  H.forEach(c=>{if(hb>1){const b=g(c);o+=PG([[c-40,b],[c-33,b-hb],[c+33,b-hb],[c+40,b]],'ice',{s:'cold',w:1});for(let k=0;k<7;k++)o+=C(c-28+r()*56,b-hb-2,2.5,'rockdark')}});
+  const lk=sm(.85,1,t);
+  if(lk>0)H.forEach((c,i)=>{const lv=g(c)-24;o+=PG([...curve(()=>lv,c-44,c+44,4),...curve(X=>Math.max(g(X),lv),c-44,c+44,4).reverse()],i===2?'mud':'water',{op:lk})});
+  if(lk>0)[30,205,215,375,385,545].forEach(x=>o+=`<g opacity="${lk}">${tree(x,g(x)+1,24)}</g>`);
+  if(hb>20&&sheet<.5)o+=T(H[1],g(H[1])-hb-12,'dödis',{a:'middle',b:1});
+  if(lk>.5){o+=T(H[0],g(H[0])-30,'sjö',{a:'middle',b:1})+T(H[1],g(H[1])-30,'sjö',{a:'middle',b:1})+T(H[2],g(H[2])-30,'torvmark',{a:'middle',b:1})+T(210,g(210)-34,'kulle',{a:'middle',b:1})}
+  return{svg:o,note:t<.2?'Isens rörelse har avtagit. Inlandsisen börjar falla sönder.':t<.85?'Kvar ligger stora block av <b>dödis</b> som inte längre hänger ihop med inlandsisen. Morän samlas runt och ovanpå dem.':'Dödisen har smält. Groparna blev <b>sjöar och torvmarker</b> med oregelbundna kullar emellan: ett <b>moränbacklandskap</b>.'}}
+ const geer=s.m==='geer',edge=320-t*340;
+ o+=R(0,0,600,320,geer?'sea':'grass',{op:geer?.8:.5});
+ if(geer&&t>.9)o+=R(0,0,600,320,'grass',{op:sm(.9,1,t)*.6});
+ if(!geer){const cols=['st1','grass','sand','st3'];for(let y=0;y<320;y+=40)for(let x=0;x<600;x+=75){if(y>edge)o+=R(x+2,y+2,71,36,cols[(x/75+y/40)%4],{op:.75,rx:2})}}
+ const ys=geer?Array.from({length:13},(_,i)=>296-i*22):[250,170,90];
+ ys.forEach((y,i)=>{if(y<edge+4)return;const p=curve(X=>y+6*Math.sin(X/45+i),20,580,10);o+=PL(p,'moran',geer?5:11,{lc:'round'});if(!geer)for(let x=40;x<580;x+=34)o+=C(x,y+6*Math.sin(x/45+i)-3,4,'forest')});
+ if(edge>0)o+=R(0,0,600,edge,'ice',{op:.93})+L(0,edge,600,edge,'cold',2.5);
+ if(edge>30)o+=T(300,Math.min(edge-12,40),'inlandsis',{a:'middle',b:1})+AR(560,edge-8,560,edge-40>10?edge-40:10,'cold');
+ if(edge>-10&&edge<300)o+=T(12,edge+20,'iskant',{size:12,b:1,c:geer?'ondark':'ink'});
+ if(geer)o+=T(590,312,'t.ex. Mälardalen, Västerbottens kustland',{a:'end',size:12,b:1,c:'ondark'});
+ return{svg:o,note:geer?'Iskanten stod i <b>vatten</b> och drog sig tillbaka lite i taget. Vid varje stopp bildades en låg rygg – till slut en hel svärm: <b>de Geer-moräner</b>.':`Uppifrån: isens kant drar sig norrut. Där kanten stod still en tid smälte mycket material fram och bildade en <b>moränrygg</b>.${t>.95?' Idag sticker ryggarna upp mitt i åkrarna – man kan inte odla på dem, så där växer träd.':''}`}}});
+
 /* 36 Rullstensåsar */
 add({id:'rullstensasar',ch:3,title:'Rullstensåsar',pages:'s. 96',
 controls:[{k:'g',type:'seg',label:'Vy',val:'b',opts:[['b','Bildning'],['x','Genomskärning']]},{k:'t',label:'Tid',min:0,max:100,val:40,fmt:pct,play:1}],
@@ -820,6 +849,32 @@ draw(s,id){const t=s.t/100;let o=R(0,0,600,320,'sky');
  o+=AR(40,215,140,215,'cold')+T(40,205,'smältvatten i tunnel',{size:12,b:1});
  if(t>.15)o+=T((edge+560)/2,200,'rullstensås',{a:'middle',b:1});
  return{svg:o,note:'Smältvattnet forsar i en tunnel under isen och för med sig sten, grus och sand. Vid mynningen sjunker materialet till botten. När isen smälter undan blir en <b>långsmal ås</b> kvar.'}}});
+
+/* 36b Israndbildningar */
+add({id:'israndbildningar',ch:3,title:'Israndbildningar',pages:'s. 97',
+controls:[{k:'m',type:'seg',label:'Typ',val:'delta',opts:[['delta','Isälvsdelta'],['zon','Mellansvenska israndzonen']]},{k:'t',label:'Tid',min:0,max:100,val:40,fmt:pct,play:1}],
+facts:['När en <b>isälvsmynning</b> låg på samma ställe under en längre period forslades mycket material ut i havet eller issjön. Det avlagrades under vattenytan till ett <b>isälvsdelta</b>.','Genom <b>landhöjningen</b> efter istiden ligger dessa platta deltaområden numera <b>på land</b>.','Där växer <b>tallskog</b>, och de används också som <b>sandtäkter</b>.','En del deltaområden har blivit <b>flygplatser</b>, t.ex. <b>Ljungbyhed</b> i Skåne, <b>Malmslätt</b> i Östergötland och <b>Kallax</b> i Norrbotten.','Under en nästan <b>tusen år</b> lång period låg isens sydliga kant över <b>Dalsland, Västergötland och Östergötland</b>.','Inlandsisen och smältvattnet förde ut stora mängder sten, grus och sand till grunda vatten vid iskanten. Dessa deltan, åsar och kullar kallas <b>den mellansvenska israndzonen</b>.'],
+draw(s){const t=s.t/100;let o=R(0,0,600,320,'sky');
+ if(s.m==='delta'){const build=sm(0,.6,t),rise=sm(.6,.9,t),seaY=170+rise*70,g=X=>150+X*.22,ice=1-sm(.55,.7,t);
+  o+=PG([[0,seaY],[600,seaY],...curve(X=>Math.max(g(X),seaY),0,600,6).reverse()],'sea',{op:.85});
+  o+=PG([...curve(g,0,600,6),[600,320],[0,320]],'rock');
+  const xe=172+build*250;
+  if(build>0){o+=PG([[172,170],[xe,170],[xe+55,g(xe+55)],[172,g(172)]],'sand',{s:'clay',w:1});for(let k=1;k<5;k++){const y=170+k*((g(172)-170)/5);o+=L(176,y,xe+55*(y-170)/(g(xe+55)-170),y,'clay',1,{op:.7})}}
+  if(ice>0){o+=PG([[0,40],[172,60],[172,g(172)],[0,g(0)]],'ice',{op:.92*ice,s:'cold',w:1});if(t<.6)o+=E(172,g(172)-8,7,9,'seadeep',{op:ice})+AR(180,g(172)-8,230,g(172)-12,'water',2.5)}
+  if(rise>0)o+=L(0,170,600,170,'seadeep',1.5,{dash:'6 5'})+T(590,164,'havsytan då',{a:'end',size:12});
+  const today=sm(.9,1,t);
+  if(today>0){o+=`<g opacity="${today}">`;[190,212,234].forEach(x=>o+=tree(x,170,26));o+=R(260,165,130,6,'rockdark')+L(268,168,382,168,'snow',1,{dash:'8 6'})+PG([[300,150],[330,150],[340,146],[340,154],[330,152]],'ink')+L(318,143,318,157,'ink',3)+PG([[xe+10,170],[xe+38,170],[xe+30,192],[xe+8,180]],'sky')+T(325,140,'flygplats',{a:'middle',b:1})+T(212,132,'tallskog',{a:'middle',b:1})+T(xe+30,160,'sandtäkt',{a:'middle',b:1})+`</g>`}
+  if(build>.1&&t<.6)o+=T((172+xe)/2,200,'isälvsdelta',{a:'middle',b:1,c:'onlight'});
+  return{svg:o,note:t<.6?'Isälvens mynning ligger kvar på samma ställe länge. Sand och grus forslas ut och lägger sig under vattenytan till ett platt <b>isälvsdelta</b>.':t<.9?'Isen har smält och <b>landet höjer sig</b>. Havsytan hamnar allt längre ner jämfört med deltat.':'Idag ligger deltat <b>på land</b>: platt mark med tallskog, sandtäkter och ibland flygplatser, som Ljungbyhed, Malmslätt och Kallax.'}}
+ const yrs=Math.round(t*1000),f=t,g=X=>205+X*.05,wl=190;
+ o+=PG([[300,wl],[600,wl],...curve(X=>Math.max(g(X),wl),300,600,6).reverse()],'sea',{op:.8})+PG([...curve(g,0,600,6),[600,320],[0,320]],'rock');
+ o+=PG([[330,g(330)],[330,wl],[330+40+90*f,wl],[330+70+100*f,g(400)]],'sand',{s:'clay',w:1,op:sm(0,.1,t)});
+ o+=PA(`M440 ${n(g(440))} Q 470 ${n(g(470)-30*f)} 500 ${n(g(500))}Z`,'gravel',{s:'clay',w:1,op:sm(.2,.4,t)})+PA(`M520 ${n(g(520))} Q 548 ${n(g(548)-22*f)} 576 ${n(g(576))}Z`,'moran',{s:'clay',w:1,op:sm(.4,.6,t)});
+ o+=PG([[0,70],[330,100],[330,g(330)],[0,g(0)]],'ice',{s:'cold',w:1,op:.95})+AR(250,g(250)-12,330,g(330)-12,'water',2.5);
+ if(t>.05)o+=T(400,wl-8,'delta',{a:'middle',b:1});if(t>.35)o+=T(470,g(470)-34*f-6,'ås',{a:'middle',b:1});if(t>.55)o+=T(548,g(548)-26*f-6,'kullar',{a:'middle',b:1});
+ o+=R(12,12,576,46,'panel',{rx:8,s:'line',w:1})+T(300,32,'Iskanten låg still över',{a:'middle',size:12,c:'muted'})+T(300,50,'Dalsland · Västergötland · Östergötland',{a:'middle',b:1,size:14});
+ o+=T(165,150,'inlandsis',{a:'middle',b:1})+T(590,312,`${yrs} år vid samma iskant`,{a:'end',b:1,size:14,c:'ondark'});
+ return{svg:o,note:`Isens sydliga kant ligger still i ${yrs} år. Smältvattnet för ut sten, grus och sand till det grunda vattnet framför iskanten.${t>.9?' Efter nästan tusen år har det bildats ett stort område med deltan, åsar och kullar: <b>den mellansvenska israndzonen</b>.':''}`}}});
 
 /* 37 Först landsänkning – sedan landhöjning */
 add({id:'landhojning',ch:3,title:'Först landsänkning – sedan landhöjning',pages:'s. 97',
@@ -874,6 +929,8 @@ const ELI5={"uppbyggnad":"Jorden är byggd ungefär som ett äpple. Ytterst finn
 "udalar":"En flod skär ut en smal, V-formad dal, ungefär som när du drar en pinne genom sand. En glaciär är mycket bredare och tyngre, som en stor glass-skopa som skrapar ut dalen. Då blir dalen U-formad. Vid Norges kust skrapade isen ännu djupare, och sedan fyllde havet dalarna: fjordar.",
 "moran":"Tänk dig en gigantisk isglass full av nötter och chokladbitar i alla storlekar. När den smälter faller alltihop ner i en blandad hög, stort och smått huller om buller. Det är morän: stenar, grus och sand helt osorterat. Morän täcker tre fjärdedelar av Sverige.",
 "rullstensasar":"Under isen rann smältvattnet i tunnlar, som vatten i ett rör. Det tog med sig stenar som rullade och blev runda. När isen smälte blev allt som hade samlats i tunneln kvar som en lång, smal ås. Om man gräver i en ås ser man att de största stenarna ligger längst ner och sanden överst.",
+"moranbacklandskap":"När isen smälte bort ojämnt bröts den sönder i stora isklumpar som blev liggande ensamma, så kallad dödis – ungefär som isbitar som ligger kvar i en sandlåda. Runt dem lades grus och sten. När klumparna till slut smälte blev det gropar som fylldes med vatten eller mosse, med kullar emellan. Där iskanten stod still en tid sköt den ihop material till en vall, som en snöplog som lämnar en sträng snö efter sig: en moränrygg.",
+"israndbildningar":"Tänk dig en vattenslang som sprutar sandigt vatten ut i en pool. Ligger slangen kvar på samma ställe länge bygger sanden upp en platt hög under vattnet, ett delta. Så gjorde smältvattnet vid isens kant. Sedan höjde sig landet, och idag ligger de platta sandområdena på torra land – en del har till och med blivit flygplatser. I mellersta Sverige låg iskanten stilla i nästan tusen år, och då bildades extra mycket sådant.",
 "landhojning":"Tänk dig att du sitter på en madrass. Där du sitter trycks den ner, och när du reser dig kommer den sakta upp igen. Inlandsisen var så tung att den tryckte ner landet, mest där isen var tjockast. När isen smälte började landet resa sig igen. Det håller fortfarande på, åtta millimeter om året längs norrlandskusten."};
 
 /* ---------- bygg sidan ---------- */
