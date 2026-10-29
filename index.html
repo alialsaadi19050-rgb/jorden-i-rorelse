@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Interaktiva modeller till kapitlet Jorden, landformer och landskap (s. 54–97).">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Jorden i rörelse</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
+<style>
+/* Layout: en smal läskolumn – varje underrubrik är ett kort: modell, förklaring, reglage, sedan text */
+:root{
+  --bg:#f3f4f0; --panel:#ffffff; --panel2:#edf0ea; --ink:#1a201d; --muted:#4b5650; --line:#d3d9d2;
+  --accent:#b0451a; --accent-soft:#fbe8dc; --onaccent:#ffffff;
+  --font-d:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-b:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --font-m:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --onlight:#1b1f1d; --ondark:#ffffff;
+  --sky:#dce9ef; --sea:#7fb0cf; --seadeep:#4f86ad; --cont:#caa66c; --ocrust:#6c7e86;
+  --mantle:#d86b3c; --mantle2:#e8964f; --coreout:#f0b648; --corein:#f6da78;
+  --magma:#e2451f; --hot:#e0552b; --cold:#2f6fb3; --ice:#e6f2f8; --rock:#9b968d; --rockdark:#57534d;
+  --st1:#e9c46a; --st2:#e29a6f; --st3:#9cbf6e; --st4:#86b3d9; --st5:#b8b2a7;
+  --sand:#e6cf96; --clay:#b9a58f; --grass:#9bbf6a; --forest:#3f6b3a; --oil:#2b2622; --gas:#ec8f8f;
+  --water:#5d9bd1; --ash:#8a8580; --sial:#ecdcb8; --sima:#5c675f; --moran:#ab9f84; --gravel:#c9b99b;
+  --mud:#7a5c3e; --snow:#ffffff; --kalk:#dad3c1; --basalt:#3d3a38; --basalt2:#5a534d; --night:#1a2440;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121715; --panel:#1b221f; --panel2:#242d29; --ink:#eaefeb; --muted:#aab5ae; --line:#34413b;
+  --accent:#f2854f; --accent-soft:#3a2418; --onaccent:#1a0e08;
+  --sky:#1e2c34; --sea:#2f607e; --seadeep:#22475f; --cont:#a8874f; --ocrust:#58686f;
+  --mantle:#b9562f; --mantle2:#c97b3d; --coreout:#d49a36; --corein:#e4c35d;
+  --magma:#ff6a3d; --hot:#ff7a4a; --cold:#6aa7e8; --ice:#c9dee8; --rock:#7e796f; --rockdark:#3e3b37;
+  --st1:#c9a54f; --st2:#c47e57; --st3:#7ea156; --st4:#6896bf; --st5:#8f897f;
+  --sand:#bba26c; --clay:#8f7d68; --grass:#6f9a48; --forest:#2f5a2b; --oil:#0f0d0c; --gas:#c96f6f;
+  --water:#4a86bd; --ash:#6f6b67; --sial:#cbb995; --sima:#46514a; --moran:#877d65; --gravel:#a3957b;
+  --mud:#6a4d33; --snow:#e9eef0; --kalk:#b6af9c; --basalt:#2a2827; --basalt2:#433d38; --night:#0c1226;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --panel:#1b221f; --panel2:#242d29; --ink:#eaefeb; --muted:#aab5ae; --line:#34413b;
+  --accent:#f2854f; --accent-soft:#3a2418; --onaccent:#1a0e08;
+  --sky:#1e2c34; --sea:#2f607e; --seadeep:#22475f; --cont:#a8874f; --ocrust:#58686f;
+  --mantle:#b9562f; --mantle2:#c97b3d; --coreout:#d49a36; --corein:#e4c35d;
+  --magma:#ff6a3d; --hot:#ff7a4a; --cold:#6aa7e8; --ice:#c9dee8; --rock:#7e796f; --rockdark:#3e3b37;
+  --st1:#c9a54f; --st2:#c47e57; --st3:#7ea156; --st4:#6896bf; --st5:#8f897f;
+  --sand:#bba26c; --clay:#8f7d68; --grass:#6f9a48; --forest:#2f5a2b; --oil:#0f0d0c; --gas:#c96f6f;
+  --water:#4a86bd; --ash:#6f6b67; --sial:#cbb995; --sima:#46514a; --moran:#877d65; --gravel:#a3957b;
+  --mud:#6a4d33; --snow:#e9eef0; --kalk:#b6af9c; --basalt:#2a2827; --basalt2:#433d38; --night:#0c1226;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:18px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-in{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.bar a{font-family:var(--font-d);font-weight:800;font-size:18px;color:var(--ink);text-decoration:none}
+.bar a span{color:var(--accent)}
+.theme{display:flex;gap:4px;background:var(--panel2);border-radius:999px;padding:4px}
+.theme button{font-family:var(--font-b);font-weight:700;font-size:15px;border:0;background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;min-height:36px}
+.theme button[aria-pressed="true"]{background:var(--panel);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+.hero{display:grid;gap:12px;padding-block:10px 24px}
+.eyebrow{font-size:15px;color:var(--muted)}
+h1{font-family:var(--font-d);font-weight:800;font-size:clamp(36px,6vw,58px);line-height:1;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lead{margin:0;font-size:19px;max-width:60ch}
+.how{display:grid;gap:6px;margin:4px 0 0;padding:0;list-style:none}
+.how li{display:flex;gap:10px;align-items:baseline}
+.how li b{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--onaccent);font-size:14px}
+nav.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px 32px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.toc h2{font-family:var(--font-d);font-size:19px;margin:0 0 8px}
+.toc h2 small{display:block;font-family:var(--font-b);font-weight:400;font-size:15px;color:var(--muted)}
+.toc ol{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.toc a{color:var(--ink);text-decoration:none;font-size:17px;display:block;padding:3px 0}
+.toc a:hover,.toc a:focus-visible{color:var(--accent);text-decoration:underline;text-underline-offset:3px;outline:none}
+.chapter{padding-top:48px}
+.ch-h{display:grid;gap:2px;padding-bottom:12px;margin-bottom:8px;border-bottom:3px solid var(--accent)}
+.ch-h h2{font-family:var(--font-d);font-weight:800;font-size:clamp(28px,4.5vw,40px);margin:0;line-height:1.1}
+.ch-h span{font-size:16px;color:var(--muted)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:24px;scroll-margin-top:76px}
+@media (max-width:520px){.sec{padding:16px;border-radius:12px}}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.sec-h h3{font-family:var(--font-d);font-weight:700;font-size:clamp(24px,3.4vw,30px);margin:0;line-height:1.15;text-wrap:balance}
+.pg{font-size:15px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:2px 10px;white-space:nowrap}
+.sec-body{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.stage{margin:0;display:grid;gap:14px;min-width:0}
+.svgbox{background:var(--panel2);border-radius:12px;overflow:hidden}
+.svgbox svg{display:block;width:100%;height:auto}
+.svgbox text{font-family:var(--font-b)}
+.note{font-size:17.5px;min-height:3.3em;background:var(--panel2);border-left:4px solid var(--accent);border-radius:4px 10px 10px 4px;padding:12px 16px}
+.ctrls{display:grid;gap:14px}
+.ctl{display:grid;grid-template-columns:120px minmax(0,1fr) 140px auto;align-items:center;gap:12px}
+.ctl label{font-weight:700;font-size:17px}
+.ctl output{font-size:16px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:620px){.ctl{grid-template-columns:minmax(0,1fr) auto auto}.ctl input{grid-column:1/-1;grid-row:2}.ctl output{text-align:right}}
+input[type=range]{width:100%;accent-color:var(--accent);height:34px;cursor:pointer}
+.play{font-family:var(--font-b);font-weight:700;font-size:16px;border:2px solid var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:6px 16px;cursor:pointer;min-width:100px;min-height:40px}
+.play[aria-pressed="true"]{background:var(--accent);color:var(--onaccent)}
+.ctl>span:empty{min-width:100px}
+@media (max-width:620px){.ctl>span:empty{display:none}}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font-family:var(--font-b);font-weight:700;font-size:16px;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:7px 16px;cursor:pointer;min-height:42px}
+.seg button:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.facts{min-width:0;display:grid;gap:18px}
+.facts h4{font-family:var(--font-d);font-weight:700;font-size:20px;margin:0 0 8px}
+.eli5{background:var(--accent-soft);border-radius:12px;padding:16px 20px 18px}
+.eli5 p{margin:0;font-size:18px;line-height:1.7}
+.facts ul{margin:0;padding-left:22px;display:grid;gap:10px;font-size:17.5px}
+.facts li{padding-left:2px}
+.facts li::marker{color:var(--accent);font-size:1.1em}
+.top{display:inline-block;margin-top:4px;font-size:15px;color:var(--muted)}
+.foot{padding-top:32px;color:var(--muted);font-size:16px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+<script>try{const t=localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <a href="#innehall">Jorden i <span>rörelse</span></a>
+  <div class="theme" role="group" aria-label="Färgläge">
+    <button type="button" id="tema-light" data-t="light">☀ Ljust</button>
+    <button type="button" id="tema-dark" data-t="dark">☾ Mörkt</button>
+    <button type="button" id="tema-auto" data-t="auto">Auto</button>
+  </div>
+</div></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Jorden, landformer och landskap · sidorna 54–97</div>
+    <h1>Jorden i <span>rörelse</span></h1>
+    <p class="lead">En modell för varje underrubrik i kapitlet. Så här använder du sidan:</p>
+    <ol class="how">
+      <li><b>1</b><span>Dra i reglagen eller tryck på <strong>Spela</strong> och titta på bilden.</span></li>
+      <li><b>2</b><span>Läs <strong>Som om du vore fem år</strong> för att förstå idén.</span></li>
+      <li><b>3</b><span>Lär dig <strong>Mer utförligt</strong> – det är det du ska kunna återberätta.</span></li>
+    </ol>
+  </header>
+  <nav class="toc" id="innehall" aria-label="Innehåll"></nav>
+  <main id="main"></main>
+  <p class="foot">Modellerna är förenklade och inte skalenliga. De överkryssade styckena i boken (moränbacklandskap, moränryggar och israndbildningar) är inte med.</p>
+</div>
+
+<script>
+/* ---------- ritverktyg ---------- */
+const V=c=>!c||c==='none'?'none':(c[0]==='#'?c:`var(--${c})`);
+const n=v=>Math.round(v*10)/10;
+function sty(f,o={}){return `style="fill:${V(f)};stroke:${V(o.s)};stroke-width:${o.w??1.5}${o.op!=null?`;opacity:${n(o.op*100)/100}`:''}${o.dash?`;stroke-dasharray:${o.dash}`:''}${o.lc?`;stroke-linecap:${o.lc}`:''};stroke-linejoin:round"`}
+const R=(x,y,w,h,f,o={})=>`<rect x="${n(x)}" y="${n(y)}" width="${n(Math.max(0,w))}" height="${n(Math.max(0,h))}"${o.rx?` rx="${o.rx}"`:''} ${sty(f,o)}/>`;
+const C=(x,y,r,f,o={})=>`<circle cx="${n(x)}" cy="${n(y)}" r="${n(Math.max(0,r))}" ${sty(f,o)}/>`;
+const E=(x,y,rx,ry,f,o={})=>`<ellipse cx="${n(x)}" cy="${n(y)}" rx="${n(Math.max(0,rx))}" ry="${n(Math.max(0,ry))}"${o.rot?` transform="rotate(${n(o.rot)} ${n(x)} ${n(y)})"`:''} ${sty(f,o)}/>`;
+const PG=(p,f,o={})=>`<polygon points="${p.map(q=>n(q[0])+','+n(q[1])).join(' ')}" ${sty(f,o)}/>`;
+const PL=(p,s,w=1.5,o={})=>`<polyline points="${p.map(q=>n(q[0])+','+n(q[1])).join(' ')}" ${sty(null,{...o,s,w})}/>`;
+const PA=(d,f,o={})=>`<path d="${d}" ${sty(f,o)}/>`;
+const L=(x1,y1,x2,y2,s='ink',w=1.5,o={})=>`<line x1="${n(x1)}" y1="${n(y1)}" x2="${n(x2)}" y2="${n(y2)}" ${sty(null,{...o,s,w})}/>`;
+const T=(x,y,t,o={})=>`<text x="${n(x)}" y="${n(y)}" font-size="${o.size||13}" text-anchor="${o.a||'start'}" style="fill:${V(o.c||'ink')}${o.b?';font-weight:700':''}${o.i?';font-style:italic':''}${o.op!=null?`;opacity:${o.op}`:''}${o.m?';font-family:var(--font-m)':''}">${t}</text>`;
+function AR(x1,y1,x2,y2,c='ink',w=2.2,o={}){const a=Math.atan2(y2-y1,x2-x1),h=9;const p1=[x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45)],p2=[x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45)];return L(x1,y1,x2-h*.6*Math.cos(a),y2-h*.6*Math.sin(a),c,w,o)+PG([[x2,y2],p1,p2],c,{op:o.op})}
+const curve=(fn,x0,x1,st=4)=>{const p=[];for(let x=x0;x<x1;x+=st)p.push([x,fn(x)]);p.push([x1,fn(x1)]);return p};
+const lerp=(a,b,t)=>a+(b-a)*t, cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const sm=(a,b,v)=>{const t=cl((v-a)/(b-a));return t*t*(3-2*t)};
+const G=x=>Math.exp(-x*x);
+function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function along(p,s){for(let i=1;i<p.length;i++){const dx=p[i][0]-p[i-1][0],dy=p[i][1]-p[i-1][1],l=Math.hypot(dx,dy);if(s<=l)return[p[i-1][0]+dx*s/l,p[i-1][1]+dy*s/l];s-=l}return p[p.length-1]}
+function plen(p){let s=0;for(let i=1;i<p.length;i++)s+=Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]);return s}
+function partial(p,s){const out=[p[0]];for(let i=1;i<p.length;i++){const dx=p[i][0]-p[i-1][0],dy=p[i][1]-p[i-1][1],l=Math.hypot(dx,dy);if(s<=l){out.push([p[i-1][0]+dx*s/l,p[i-1][1]+dy*s/l]);return out}out.push(p[i]);s-=l}return out}
+const fmtN=v=>{const r=v>=100?Math.round(v):Math.round(v*10)/10;return r.toLocaleString('sv-SE')};
+const band=(top,bot,x0,x1,f,o)=>PG([...curve(top,x0,x1,4),...curve(bot,x0,x1,4).reverse()],f,o);
+const tree=(x,y,h,f='forest')=>PG([[x,y-h],[x-h*.32,y],[x+h*.32,y]],f)+R(x-1.5,y,3,4,'rockdark');
+
+/* ---------- sektioner ---------- */
+const CH=[['Jordklotets uppbyggnad','s. 54–59'],['Jordens inre krafter','s. 60–70'],['Jordens yttre krafter','s. 71–74'],['Isen formade landskapet','s. 90–97']];
+const S=[];const add=c=>S.push(c);
+const pct=v=>Math.round(v)+' %';
+
+/* 1 Jordklotets uppbyggnad */
+add({id:'uppbyggnad',ch:0,title:'Jordklotets uppbyggnad',pages:'s. 54',
+controls:[{k:'d',label:'Djup',min:0,max:100,val:22,fmt:v=>v==0?'ytan':v==100?'mittpunkten':pct(v),play:1},{k:'c',label:'Konvektion',min:0,max:100,val:20,fmt:v=>'tid '+v}],
+facts:['Inifrån och ut: <b>kärnan</b>, <b>manteln</b> och <b>jordskorpan</b>.','Kärnan består av <b>järn och nickel</b>. Den inre kärnan är <b>fast</b> (enormt tryck), den yttre <b>flytande</b> (lägre tryck). Järnet och nicklet ger jorden ett <b>magnetfält</b>.','Manteln: föreningar av <b>magnesium, kisel och järn</b>.','<b>Astenosfären</b> är "den mjuka zonen" i övre manteln, <b>100–350 km</b> djupt. Den är tjockflytande.','Radioaktiva ämnen avger värme när de sönderfaller. Varmt material utvidgar sig, blir lättare och stiger. Material som kylts av vid skorpan blir tyngre och sjunker: <b>konvektionsströmmar</b>.','Över <b>5 000 °C</b> längst in. Nära ytan ökar temperaturen ca <b>15 °C/km</b> i urberg och över <b>60 °C/km</b> i vulkaniska trakter (energi utvinns på Island, Azorerna, Nya Zeeland och i Italien).'],
+draw(s){const cx=165,cy=162,R0=140;let o='';
+ o+=C(cx,cy,R0,'cont',{s:'ink',w:1})+C(cx,cy,135,'mantle2')+C(cx,cy,113,'mantle')+C(cx,cy,72,'coreout')+C(cx,cy,38,'corein');
+ for(let k=0;k<10;k++){const a=k*Math.PI*2/10,mx=cx+106*Math.cos(a),my=cy+106*Math.sin(a),dir=k%2?1:-1;
+  o+=E(mx,my,17,11,null,{s:'onlight',w:.8,op:.35,rot:a*180/Math.PI});
+  for(let j=0;j<3;j++){const ph=s.c/100*Math.PI*4+j*2.094,ra=17*Math.cos(dir*ph),ta=11*Math.sin(dir*ph),vr=-dir*Math.sin(dir*ph);
+   o+=C(mx+ra*Math.cos(a)-ta*Math.sin(a),my+ra*Math.sin(a)+ta*Math.cos(a),3.3,vr>0?'hot':'cold',{s:'onlight',w:.6})}}
+ const py=cy-R0+s.d/100*R0, r=R0*(1-s.d/100);
+ o+=L(cx,cy-R0-14,cx,py,'ink',2.2)+C(cx,py,6.5,'accent',{s:'panel',w:2});
+ const idx=r>135?0:r>113?1:r>72?2:r>38?3:4;
+ const lay=[['Jordskorpan','tunn som ett äppelskal','cont'],['Astenosfären','"mjuka zonen", 100–350 km','mantle2'],['Manteln','magnesium, kisel, järn','mantle'],['Yttre kärnan','flytande järn och nickel','coreout'],['Inre kärnan','fast järn och nickel','corein']];
+ lay.forEach((l,i)=>{const y=40+i*52;if(i===idx)o+=R(330,y-20,256,46,'panel2',{rx:5});
+  o+=R(342,y-12,18,18,l[2],{s:'ink',w:1,rx:3})+T(372,y+1,l[0],{size:15,b:i===idx})+T(372,y+18,l[1],{size:12,c:'muted'});});
+ o+=T(342,302,'Dra i Djup för att gå mot mitten',{size:11,c:'muted'});
+ o+=T(36,316,'Röda punkter stiger, blå sjunker',{size:11,c:'muted'});
+ const notes=['<b>Jordskorpan</b> – lika tjock som skalet på ett äpple. Här ökar temperaturen snabbast: ca 15 °C per km i urberg, över 60 °C per km i vulkaniska trakter.','<b>Astenosfären</b> – den mjuka, tjockflytande zonen i övre manteln, 100–350 km ner. Här rör sig materialet i konvektionsströmmar.','<b>Manteln</b> – byggd av föreningar av magnesium, kisel och järn. Värme från radioaktiva ämnen som sönderfaller driver strömmarna.','<b>Yttre kärnan</b> – järn och nickel. Flytande eftersom trycket är lägre än längst in.','<b>Inre kärnan</b> – järn och nickel, fast på grund av det enorma trycket. Över 5 000 °C längst in.'];
+ return{svg:o,note:notes[idx]}}});
+
+/* 2 Jordskorpan */
+add({id:'jordskorpan',ch:0,title:'Jordskorpan',pages:'s. 54',
+controls:[{k:'x',label:'Plats',min:0,max:100,val:16,fmt:v=>v<52?'på land':v<75?'kontinentalsockel':'djuphav',play:1}],
+facts:['I förhållande till de andra skikten är skorpan lika tjock som <b>skalet på ett äpple</b>.','Den största höjdskillnaden på jordytan är <b>högst 20 km</b>, från den högsta bergstoppen till den djupaste oceangravens botten.','<b>Oceanisk jordskorpa</b> finns på havsbottnarna: <b>6–11 km</b> tjock.','<b>Kontinental jordskorpa</b> finns på landmassorna: <b>26–90 km</b> tjock. Tjockast under bergskedjor.'],
+draw(s){const sea=92,k=1.5;
+ const surf=X=>X<300?84-38*G((X-95)/42):X<360?lerp(84,98,(X-300)/60):X<430?lerp(98,138,(X-360)/70):138;
+ const th=X=>{const c=30+60*G((X-95)/55);if(X<300)return c;if(X<430)return lerp(30+60*G(205/55),8,sm(300,430,X));return 7+3.5*(.5+.5*Math.sin(X/23))};
+ const mo=X=>surf(X)+th(X)*k;let o='';
+ o+=R(0,0,600,320,'mantle')+R(0,0,600,sea,'sky');
+ o+=PG([...curve(surf,0,395,5),...curve(mo,0,395,5).reverse()],'cont');
+ o+=PG([...curve(surf,395,600,5),...curve(mo,395,600,5).reverse()],'ocrust');
+ o+=PG([[334,sea],[600,sea],...curve(surf,334,600,5).reverse()],'sea');
+ o+=T(150,150,'Kontinental skorpa',{c:'onlight',b:1})+T(470,190,'Oceanisk skorpa',{c:'ondark',b:1,a:'middle'})+T(300,300,'Manteln',{c:'ondark',b:1,a:'middle'})+T(95,30,'Bergskedja',{a:'middle'})+T(500,118,'Djuphav',{c:'ondark',a:'middle'});
+ const X=20+s.x*5.6,y1=surf(X),y2=mo(X),t=th(X),typ=X<395?'kontinental':'oceanisk';
+ o+=L(X,y1,X,y2,'ink',3)+L(X-8,y1,X+8,y1,'ink',3)+L(X-8,y2,X+8,y2,'ink',3);
+ const bx=cl(X-46,4,504);o+=R(bx,y2+8,92,24,'panel',{rx:4,s:'ink',w:1})+T(bx+46,y2+25,`≈ ${Math.round(t)} km`,{a:'middle',b:1,m:1});
+ o+=T(590,312,'Höjder ej skalenliga',{a:'end',size:11,c:'ondark'});
+ return{svg:o,note:`Här är skorpan <b>${typ}</b> och ungefär <b>${Math.round(t)} km</b> tjock. ${typ==='kontinental'?'Kontinental skorpa är 26–90 km, tjockast under höga berg.':'Oceanisk skorpa är bara 6–11 km.'}`}}});
+
+/* 3 Jordskorpans sammansättning */
+add({id:'sammansattning',ch:0,title:'Jordskorpans sammansättning',pages:'s. 54–55',
+controls:[{k:'m',type:'seg',label:'Var',val:'k',opts:[['k','Kontinent'],['o','Ocean'],['p','Under Stilla havet']]},{k:'d',label:'Gå nedåt',min:0,max:100,val:25,fmt:pct,play:1}],
+facts:['Ca <b>99 %</b> av skorpan är kemiska föreningar som innehåller <b>syre, kisel, aluminium, järn, kalcium, kalium, natrium och magnesium</b>.','Alla andra grundämnen utgör bara <b>1 %</b>.','<b>Sial</b> = övre delen: lättare, ljusa bergarter med <b>kisel (Si) och aluminium (Al)</b>.','<b>Sima</b> = undre delen: tyngre, mörka bergarter med mest <b>kisel och magnesium (Mg)</b>.','Kontinental skorpa har oftast sial överst. Oceanisk skorpa är mest sima. Under Stilla havet består den <b>helt av sima</b>.'],
+draw(s){const fr={k:.55,o:.15,p:0}[s.m],y0=40,h=220,sh=fr*h;let o='';
+ o+=R(40,y0,280,sh,'sial',{s:'ink',w:1})+R(40,y0+sh,280,h-sh,'sima',{s:'ink',w:1});
+ if(sh>28)o+=T(180,y0+sh/2+6,'SIAL',{a:'middle',b:1,size:18,c:'onlight'});
+ o+=T(180,y0+sh+(h-sh)/2+6,'SIMA',{a:'middle',b:1,size:18,c:'ondark'});
+ const my=y0+s.d/100*h,inS=my<y0+sh;
+ o+=L(28,my,332,my,'accent',2.5)+C(28,my,6,'accent');
+ o+=T(180,y0-12,{k:'Kontinental skorpa',o:'Oceanisk skorpa',p:'Skorpan under Stilla havet'}[s.m],{a:'middle',b:1});
+ const el=[['O','syre'],['Si','kisel'],['Al','aluminium'],['Fe','järn'],['Ca','kalcium'],['K','kalium'],['Na','natrium'],['Mg','magnesium']];
+ const hi=inS?['Si','Al']:['Si','Mg'];
+ o+=T(360,28,'99 % föreningar med:',{size:12,c:'muted'});
+ el.forEach((e,i)=>{const y=46+i*25;if(hi.includes(e[0]))o+=R(354,y-2,220,23,'accent-soft',{rx:3});o+=T(364,y+15,e[0],{b:1,m:1,size:14})+T(404,y+15,e[1],{size:14})});
+ o+=R(360,262,214*.99,16,'accent',{op:.75})+R(360+214*.99,262,2.5,16,'ink')+T(360,296,'99 %',{m:1,size:12})+T(574,296,'1 % övriga',{a:'end',m:1,size:12});
+ return{svg:o,note:inS?'<b>Sial</b>: lättare, ljusa bergarter. Kisel och aluminium är viktiga inslag.':'<b>Sima</b>: tyngre, mörka bergarter med mest kisel och magnesium.'}}});
+
+/* 4 Jordskorpans pusselbitar */
+const PLATES=[
+ {k:'ant',n:'Antarktiska',big:1,p:[[[0,236],[600,236],[600,300],[0,300]]],l:[300,272]},
+ {k:'nam',n:'Nordamerikanska',big:1,p:[[[16.7,33.3],[83.3,8.3],[250,8.3],[250,125],[200,125],[158.3,133.3],[125,116.7],[91.7,83.3],[50,53.3],[16.7,50]]],l:[175,75]},
+ {k:'sam',n:'Sydamerikanska',big:1,p:[[[166.7,133.3],[200,125],[250,125],[275,236],[170,236],[166.7,141.7]]],l:[218,185]},
+ {k:'naz',n:'Nazca',big:0,p:[[[116.7,141.7],[163,141.7],[168,236],[116.7,236]]],l:[140,192]},
+ {k:'eur',n:'Eurasiska',big:1,p:[[[250,8.3],[550,8.3],[550,66.7],[533,91.7],[500,116.7],[466.7,150],[458,116.7],[416.7,100],[375,91.7],[333,88.3],[283,88.3],[250,83.3]]],l:[400,50]},
+ {k:'afr',n:'Afrikanska',big:1,p:[[[250,83.3],[283,88.3],[333,88.3],[358,96.7],[366.7,130],[391.7,130],[400,166.7],[391.7,236],[275,236],[250,125]]],l:[318,170]},
+ {k:'ara',n:'Arabiska',big:0,p:[[[358,96.7],[375,91.7],[400,108.3],[391.7,130],[366.7,130]]],l:[380,116]},
+ {k:'ia',n:'Indisk-australiska',big:1,p:[[[400,108.3],[416.7,100],[458,116.7],[466.7,150],[533,158.3],[591.7,175],[583,236],[391.7,236],[400,166.7],[391.7,130]]],l:[490,200]},
+ {k:'phi',n:'Filippinska',big:0,p:[[[500,116.7],[533,91.7],[541.7,125],[516.7,141.7]]],l:[522,118]},
+ {k:'pac',n:'Stillahavsplattan',big:1,p:[[[550,66.7],[600,58.3],[600,236],[583,236],[591.7,175],[533,158.3],[516.7,141.7],[541.7,125],[533,91.7]],[[0,58.3],[16.7,50],[50,53.3],[91.7,83.3],[125,116.7],[116.7,141.7],[116.7,236],[0,236]]],l:[58,160]}];
+const EQ=(()=>{const r=rng(7),pts=[];PLATES.forEach(pl=>pl.p.forEach(poly=>{for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];if((a[0]<1&&b[0]<1)||(a[0]>599&&b[0]>599)||(a[1]<10&&b[1]<10)||(a[1]>299&&b[1]>299))continue;const l=Math.hypot(b[0]-a[0],b[1]-a[1]);for(let d=0;d<l;d+=9){const t=d/l;pts.push([a[0]+(b[0]-a[0])*t+(r()-.5)*7,a[1]+(b[1]-a[1])*t+(r()-.5)*7,r()])}}}));return pts.sort((a,b)=>a[2]-b[2])})();
+add({id:'pusselbitar',ch:0,title:'Jordskorpans pusselbitar',pages:'s. 55',
+controls:[{k:'p',type:'seg',label:'Platta',val:'pac',opts:[['eur','Eurasiska'],['afr','Afrikanska'],['nam','Nordamerikanska'],['sam','Sydamerikanska'],['ant','Antarktiska'],['ia','Indisk-australiska'],['pac','Stillahavsplattan']]},{k:'q',label:'Jordskalv',min:0,max:100,val:40,fmt:v=>Math.round(v*2.4)+' st',play:1}],
+facts:['Jordskorpan består av <b>sju stora plattor</b> och ett <b>femtontal mindre</b>.','De stora: eurasiska, afrikanska, nordamerikanska, sydamerikanska, antarktiska, indisk-australiska och stillahavsplattan.','<b>Stillahavsplattan</b> är den enda större plattan som bara består av oceanbotten.','De flesta plattor har kontinental skorpa i de inre delarna och oceanisk skorpa i ytterområdena, som mest är grunda hav.','Oceanisk skorpa har <b>högre densitet</b> än kontinental.','De flesta jordskalv och vulkanutbrott sker vid <b>plattgränserna</b>.'],
+draw(s){let o=R(0,0,600,300,'sea',{rx:10});
+ PLATES.forEach(pl=>{const sel=pl.k===s.p;pl.p.forEach(poly=>o+=PG(poly,sel?'accent':pl.big?'cont':'rock',{s:'panel',w:2.5,op:sel?.9:pl.big?.75:.6}))});
+ PLATES.forEach(pl=>o+=T(pl.l[0],pl.l[1],pl.n,{a:'middle',size:pl.big?12:10,b:pl.k===s.p,c:pl.k===s.p?'onaccent':'onlight'}));
+ const N=Math.round(s.q*2.4);for(let i=0;i<Math.min(N,EQ.length);i++)o+=C(EQ[i][0],EQ[i][1],2.6,'magma',{s:'ondark',w:.6});
+ o+=T(8,316,'Schematisk karta · röda prickar = jordskalv',{size:11,c:'muted'});
+ const info={pac:'Stillahavsplattan är den enda större plattan som <b>bara består av oceanbotten</b>.',eur:'Eurasiska plattan: Europa och större delen av Asien.',afr:'Afrikanska plattan trycker norrut mot Europa.',nam:'Nordamerikanska plattan: gränsen mot eurasiska går genom Atlanten och Island.',sam:'Sydamerikanska plattan: Nazcaplattan pressas in under dess västkust.',ant:'Antarktiska plattan omger Sydpolen.',ia:'Indisk-australiska plattan trycker mot Asien och bildar Himalaya.'};
+ return{svg:o,note:info[s.p]+' Prickarna visar att skalven samlas längs <b>plattgränserna</b>.'}}});
+
+/* 5 Plattgränser */
+add({id:'plattgranser',ch:0,title:'Plattgränser',pages:'s. 56–57',
+controls:[{k:'m',type:'seg',label:'Typ',val:'spr',opts:[['spr','Spridningszon'],['ok','Ocean mot kontinent'],['oo','Ocean mot ocean'],['kk','Kontinent mot kontinent'],['fr','Friktionszon']]},{k:'t',label:'Tid',min:0,max:100,val:45,fmt:v=>v+' %',play:1}],
+facts:['Två slag av plattgränser: <b>spridningszoner</b> och <b>kollisionszoner</b>.','Spridningszon: magma stiger, bildar ny skorpa och skjuter isär plattorna. Ex: <b>mittatlantiska ryggen</b> (går upp över havsytan på Island), indiska centralryggen, östpacifiska centralryggen. <b>Great Rift Valley</b> är en passiv spridningszon.','Ca <b>75 %</b> av all lava kommer fram i spridningszonerna.','Kollisionszon: havsbotten glider ner under en kontinent = <b>subduktion</b> (Syd- och Mellanamerikas västkust, Asiens östkust). Ger höga berg, djuphavsgravar och vulkaniska öbågar, t.ex. Marianergraven med <b>Challengerdjupet (11 043 m)</b>.','<b>Konvergens</b>: kontinenter kolliderar → bergskedjeveckning, t.ex. Himalaya.','<b>Friktionszon</b>: plattor rör sig längs varandra, t.ex. San Andreasförkastningen (San Francisco 1906).'],
+draw(s,id){const t=s.t;let o='';
+ if(s.m==='fr'){const D=t*1.2,slip=Math.floor(t/25)*30;
+  o+=R(0,0,300,320,'cont',{op:.55})+R(300,0,300,320,'sial',{op:.7})+L(300,0,300,320,'ink',2,{dash:'7 5'});
+  const yl=170-D/2,yn=170-slip/2,yr=170+D/2,yn2=170+slip/2;
+  const rd=`M10 ${n(yl)} C 190 ${n(yl)} 240 ${n(yn)} 297 ${n(yn)}`,rd2=`M303 ${n(yn2)} C 360 ${n(yn2)} 410 ${n(yr)} 590 ${n(yr)}`;
+  o+=PA(rd,null,{s:'rockdark',w:12})+PA(rd2,null,{s:'rockdark',w:12})+PA(rd,null,{s:'sand',w:1.5,dash:'8 7'})+PA(rd2,null,{s:'sand',w:1.5,dash:'8 7'});
+  o+=AR(150,300,150,232,'ink')+AR(450,30,450,98,'ink');
+  o+=T(150,26,'Stillahavsplattan',{a:'middle',b:1})+T(450,312,'Nordamerikanska plattan',{a:'middle',b:1})+T(310,18,'San Andreasförkastningen',{size:12});
+  const ph=t%25,quake=t>=25&&ph<4;
+  if(quake)for(let k=0;k<3;k++)o+=C(300,170,14+k*16,null,{s:'magma',w:3,op:.8-k*.22});
+  const strain=Math.round((D-slip)/30*100);
+  return{svg:o,note:quake?'<b>Skalv!</b> Spänningen löses ut och vägen hoppar isär längs förkastningen.':`Plattorna glider förbi varandra. Friktionen gör att spänning byggs upp (${strain} %) innan den löses ut i ett skalv.`}}
+ o+=R(0,0,600,110,'sky')+R(0,150,600,170,'mantle')+R(0,250,600,70,'mantle2');
+ o+=T(12,240,'mantel (fast zon)',{size:11,c:'ondark'})+T(12,312,'mantel (mjuk zon)',{size:11,c:'onlight'});
+ if(s.m==='spr'){const g=t*.55;
+  o+=R(0,110,600,40,'sea');
+  o+=PA(`M255 320 Q300 230 ${n(300-g-5)} 172 L ${n(300+g+5)} 172 Q300 230 345 320Z`,'magma',{op:.9});
+  o+=R(0,150,300-g,22,'ocrust')+R(300+g,150,300-g,22,'ocrust')+R(300-g,150,2*g,22,'hot');
+  o+=PG([[300-g-46,150],[300-g,131],[300+g,131],[300+g+46,150]],'ocrust',{op:.95})+L(300,131,300,172,'magma',3);
+  for(let k=0;k<8;k++){const xl=300-g-22-k*40,xr=300+g+22+k*40;if(xl>0)o+=L(xl,153,xl,169,'ondark',1.5,{op:.45});if(xr<600)o+=L(xr,153,xr,169,'ondark',1.5,{op:.45})}
+  o+=AR(250,205,150,205,'ondark')+AR(350,205,450,205,'ondark');
+  o+=T(300,100,'mittoceanrygg',{a:'middle',b:1})+T(70,166,'oceanisk jordskorpa',{size:11,c:'ondark'})+T(300,290,'magma stiger',{a:'middle',c:'ondark',b:1});
+  return{svg:o,note:`Plattorna glider isär och <b>ny jordskorpa</b> bildas av uppvällande magma. Ny skorpa hittills: ${Math.round(g*2)} enheter bred.`}}
+ const pts=[[0,158],[270,158],[300,166],[335,185],[470,320]],Lp=plen(pts);
+ if(s.m==='ok'){const h=t*.55,top=X=>104-h*G((X-385)/38)-.35*h*G((X-445)/28);
+  o+=R(0,110,312,48,'sea');
+  o+=PL(pts,'ocrust',22);
+  for(let k=0;k<14;k++){const p=along(pts,(k*45+t*1.6)%Lp);o+=C(p[0],p[1],2.6,'ondark',{op:.6})}
+  o+=PG([...curve(top,300,600,5),[600,218],[392,218],[338,182],[303,160]],'cont');
+  const va=sm(35,70,t);
+  if(va>0){o+=PA(`M405 252 Q398 190 386 ${n(top(386)+6)}`,null,{s:'magma',w:1+4*va,op:va});for(let k=0;k<3;k++)o+=C(386+k*6,top(386)-12-k*14,7+k*4,'ash',{op:va*.65})}
+  o+=AR(40,190,140,190,'ondark')+T(300,138,'djuphavsgrav',{a:'middle',size:12,c:'ondark'})+T(470,160,'kontinental jordskorpa',{size:11,c:'onlight'})+T(60,148,'oceanisk jordskorpa',{size:11,c:'ondark'})+T(410,282,'uppsmältning',{size:12,c:'ondark',b:1});
+  return{svg:o,note:`Den tyngre oceanplattan pressas ner under kontinentplattan: <b>subduktion</b>. Längs kollisionszonen växer berg (${Math.round(h*30)} m i modellen) och en djuphavsgrav bildas.${va>0?' Smält material stiger och ger <b>vulkaner</b>.':''}`}}
+ if(s.m==='oo'){const hv=t*.95;
+  o+=R(0,110,600,48,'sea');
+  o+=PL(pts,'ocrust',22);
+  for(let k=0;k<14;k++){const p=along(pts,(k*45+t*1.6)%Lp);o+=C(p[0],p[1],2.6,'ondark',{op:.6})}
+  o+=PG([[300,150],[600,150],[600,173],[342,173],[305,160]],'ocrust');
+  [[400,1],[465,.8]].forEach(([x,f])=>{const hk=hv*f;o+=PG([[x-52,151],[x-6,151-hk],[x+6,151-hk],[x+52,151]],'rockdark');if(hk>45)o+=C(x,151-hk-10,6,'ash',{op:.7})});
+  o+=L(0,110,600,110,'seadeep',1.5);
+  if(t>20)o+=PA(`M412 262 Q408 200 400 ${n(151-hv*.6)}`,null,{s:'magma',w:3,op:sm(20,50,t)});
+  o+=AR(40,190,140,190,'ondark')+T(300,138,'djuphavsgrav',{a:'middle',size:12,c:'ondark'})+T(410,282,'uppsmältning',{size:12,c:'ondark',b:1});
+  if(hv>45)o+=T(430,151-hv-24,'vulkanisk öbåge',{a:'middle',b:1});
+  return{svg:o,note:`Två oceanplattor kolliderar och den ena pressas ner under den andra. Resultat: <b>djuphavsgravar</b> och <b>vulkaniska öbågar</b>${hv>45?' – vulkanerna har nu nått över havsytan':''}. Ex: Marianergraven, Challengerdjupet 11 043 m.`}}
+ if(s.m==='kk'){const c=Math.min(t,45)/45,F=Math.max(0,t-45)/55*95;
+  const Lr=200+c*100,Rl=400-c*100,tops=[118,136,154,172],cols=['st1','st2','st3','cont'];
+  const f=X=>F*G((X-300)/55)*(1+.18*Math.sin(X/8)),root=X=>232+F*.7*G((X-300)/60);
+  if(Rl-Lr>1)o+=R(Lr,110,Rl-Lr,40,'sea');
+  const rngs=c<1?[[0,Lr],[Rl,600]]:[[0,600]];
+  rngs.forEach(([a,b])=>{for(let i=0;i<4;i++){const up=X=>tops[i]-f(X)*(1-i*.12),dn=i<3?X=>tops[i+1]-f(X)*(1-(i+1)*.12):root;o+=band(up,dn,a,b,cols[i])}});
+  o+=AR(40,280,130,280,'ondark')+AR(560,280,470,280,'ondark');
+  o+=T(80,190,'kontinental jordskorpa',{size:11,c:'onlight'})+T(520,190,'kontinental jordskorpa',{size:11,c:'onlight',a:'middle'});
+  if(F>25)o+=T(300,Math.max(16,118-F*1.1-8),'bergskedja (t.ex. Himalaya)',{a:'middle',b:1});
+  return{svg:o,note:c<1?'Två kontinentplattor närmar sig varandra. Havet mellan dem försvinner.':`Kontinenterna pressas ihop: <b>konvergens</b>. Berggrunden veckas och lyfts upp till en bergskedja (höjd i modellen: ${Math.round(F*90)} m). Så bildas Himalaya, där indisk-australiska plattan trycker mot Asien.`}}
+}});
+
+/* 6 Plattrörelserna */
+const KF={200:{NA:[235,85],SA:[255,170],EU:[345,75],AF:[310,150],IN:[372,190],AU:[410,215],AN:[330,240]},135:{NA:[205,85],SA:[235,180],EU:[355,75],AF:[315,165],IN:[385,185],AU:[425,230],AN:[335,255]},0:{NA:[140,90],SA:[190,200],EU:[395,80],AF:[320,165],IN:[438,138],AU:[505,215],AN:[320,282]}};
+const CS={NA:['Nordamerika',70,45,-10],SA:['Sydamerika',32,55,15],EU:['Eurasien',115,42,0],AF:['Afrika',48,58,0],IN:['Indien',18,22,0],AU:['Australien',34,22,0],AN:['Antarktis',75,16,0]};
+add({id:'plattrorelserna',ch:0,title:'Plattrörelserna',pages:'s. 57',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:0,fmt:v=>v==100?'nu':Math.round(200-v*2)+' milj. år sedan',play:1}],
+facts:['Kontinenterna har kolliderat och förstenats till större kontinenter flera gånger. Gamla plattgränser syns mitt på kontinenter, t.ex. i <b>Skåne</b>.','För ca <b>200 miljoner år</b> sedan var alla kontinenter samlade i <b>Pangea</b>.','Pangea delades i <b>Laurasien</b> (norr) och <b>Gondwanaland</b> (söder: Afrika, Australien, Antarktis, Sydamerika).','Läran om plattorna och deras rörelser kallas <b>platt-tektonik</b>. "Tektonik" kommer från grekiska för snickare/byggmästare.','Afrikas och Sydamerikas kuster passar ihop. Det märkte man redan på <b>1500-talet</b>.'],
+draw(s){const ma=200-s.t*2;let A,B,u;if(ma>=135){A=KF[200];B=KF[135];u=(200-ma)/65}else{A=KF[135];B=KF[0];u=(135-ma)/135}
+ let o=R(0,0,600,310,'sea',{rx:10});for(let y=50;y<300;y+=50)o+=L(0,y,600,y,'seadeep',1,{op:.4});
+ const pos={};Object.keys(CS).forEach(k=>{pos[k]=[lerp(A[k][0],B[k][0],u),lerp(A[k][1],B[k][1],u)];const c=CS[k];o+=E(pos[k][0],pos[k][1],c[1],c[2],'cont',{s:'onlight',w:1,rot:c[3]})});
+ Object.keys(CS).forEach(k=>o+=T(pos[k][0],pos[k][1]+4,CS[k][0],{a:'middle',size:11,c:'onlight'}));
+ const nm=ma>170?'Pangea':ma>60?'Laurasien + Gondwanaland':'Dagens kontinenter';
+ o+=R(10,10,250,30,'panel',{rx:4,op:.9})+T(20,31,nm,{b:1,size:16});
+ o+=T(590,31,ma<1?'nu':`${Math.round(ma)} milj. år sedan`,{a:'end',m:1,c:'ondark'});
+ if(ma>60){o+=T(lerp(pos.EU[0],pos.AF[0],.5)+60,lerp(pos.EU[1],pos.AF[1],.5)+8,'Tethyshavet',{i:1,size:12,c:'ondark'})}
+ if(ma<=170&&ma>60){o+=T((pos.NA[0]+pos.EU[0])/2,24+44,'LAURASIEN',{a:'middle',b:1,size:12,c:'ondark'});o+=T((pos.SA[0]+pos.AF[0])/2,(pos.SA[1]+pos.AF[1])/2+75,'GONDWANA',{a:'middle',b:1,size:12,c:'ondark'})}
+ return{svg:o,note:ma>170?'Alla kontinenter sitter ihop i den stora <b>Pangeakontinenten</b>.':ma>60?'Pangea har delats i <b>Laurasien</b> i norr och <b>Gondwanaland</b> i söder.':ma>0.5?'Laurasien och Gondwana har brutits upp i flera delar som blir våra kontinenter. Indien är på väg mot Asien.':'Dagens läge. Mellan kontinenterna ligger havsbottnar som bildats i spridningszonerna.'}}});
+
+/* 7 Alfred Wegener */
+const COAST=[[0,60],[18,85],[38,110],[42,135],[30,160],[14,190],[4,225],[-6,260]];
+add({id:'wegener',ch:0,title:'Alfred Wegener',pages:'s. 59',
+controls:[{k:'f',label:'Skjut ihop',min:0,max:100,val:20,fmt:pct,play:1}],
+facts:['Alfred Wegener (<b>1880–1930</b>) från Tyskland var <b>meteorolog</b>.','Han presenterade sin teori <b>1912</b>: kontinenterna rör sig fram genom havsbottnen.','Hans kartor visade att kontinenterna för <b>250 miljoner år</b> sedan bildade en urkontinent: <b>Pangea</b> = "allt land" på grekiska.','Bevis: likartade <b>kustkonturer</b> och <b>bergskedjor</b> på båda sidor om Atlanten med <b>samma ålder</b>.','Mötte kompakt motstånd: han kunde inte förklara varifrån krafterna kom. Accepterades först på <b>1960-talet</b>.'],
+draw(s){const d=(1-s.f/100)*110;let o=R(0,0,600,320,'sea');
+ const SA=[[-95,45],[-35,38],...COAST,[-30,290],[-50,305],[-62,272],[-88,200],[-112,130],[-115,80]].map(p=>[p[0]+260-d,p[1]]);
+ const AF=[[30,10],[150,0],[188,52],[205,96],[172,160],[132,222],[100,262],[70,272],...COAST.slice().reverse(),[6,40]].map(p=>[p[0]+260+d,p[1]]);
+ o+=PG(SA,'cont',{s:'onlight',w:1})+PG(AF,'sial',{s:'onlight',w:1});
+ o+=L(260-d-75,126,260-d+38,124,'rockdark',9,{dash:'5 3'})+L(260+d+40,124,260+d+150,116,'rockdark',9,{dash:'5 3'});
+ o+=T(260-d-50,215,'Sydamerika',{a:'middle',b:1,c:'onlight'})+T(260+d+100,85,'Afrika',{a:'middle',b:1,c:'onlight'});
+ o+=T(260+d+100,108,'samma bergskedjor',{a:'middle',size:11,c:'onlight'});
+ o+=T(300,20,s.f>96?'Pangea – "allt land"':'Atlanten',{a:'middle',b:1,c:'ondark'});
+ return{svg:o,note:s.f>96?'Kusterna passar ihop som pusselbitar och bergskedjorna med samma ålder fortsätter över skarven. Det var Wegeners bevis.':'Dra ihop kontinenterna. Lägg märke till hur Sydamerikas östkust passar in i Afrikas västkust.'}}});
+
+/* 8 Förkastningar */
+add({id:'forkastningar',ch:1,title:'Förkastningar',pages:'s. 60',
+controls:[{k:'m',type:'seg',label:'Typ',val:'hor',opts:[['van','Vanlig förskjutning'],['hor','Horst'],['gra','Gravsänka']]},{k:'t',label:'Rörelse',min:0,max:100,val:55,fmt:pct,play:1}],
+facts:['Krafter inne i jorden ger <b>endogena</b> (inre) processer. De flesta sker vid plattgränserna, men gamla plattgränser kan ge skalv långt in på plattorna.','En <b>förkastning</b> är en spricka som uppstår vid ett jordskalv. Marken kan förskjutas i höjdled eller sidled.','Den del som höjs = <b>horst</b>. Den del som sjunker = <b>gravsänka</b>.','Horstar: <b>Jurabergen</b> (Frankrike), <b>Harz</b> (Tyskland), skånska åsarna som <b>Hallandsåsen</b>.','Gravsänkor: <b>Rhendalen</b> och <b>Vättern</b>.','Branta sluttningar har ofta bildats genom förkastningar.'],
+draw(s,id){const t=s.t;let o=R(0,0,600,320,'sky');
+ const B={van:[[[[60,110],[290,110],[322,270],[60,270]],0],[[[290,110],[540,110],[540,270],[322,270]],t*.4]],
+ hor:[[[[60,110],[230,110],[200,270],[60,270]],0],[[[230,110],[370,110],[400,270],[200,270]],-t*.42],[[[370,110],[540,110],[540,270],[400,270]],0]],
+ gra:[[[[60,110],[220,110],[250,270],[60,270]],0],[[[220,110],[380,110],[350,270],[250,270]],t*.42],[[[380,110],[540,110],[540,270],[350,270]],0]]};
+ const blocks=B[s.m];
+ o+=`<clipPath id="${id}fr"><rect x="60" y="0" width="480" height="270"/></clipPath><g clip-path="url(#${id}fr)">`+R(60,200,480,70,'st5');
+ blocks.forEach(([poly,dy],i)=>{o+=`<g transform="translate(0 ${n(dy)})"><clipPath id="${id}b${i}"><polygon points="${poly.map(p=>p.join(',')).join(' ')}"/></clipPath><g clip-path="url(#${id}b${i})">`+R(60,110,480,26,'st1')+R(60,136,480,26,'st2')+R(60,162,480,34,'st3')+R(60,196,480,40,'st4')+R(60,236,480,40,'st5')+`</g>`+PG(poly,null,{s:'onlight',w:1.5})+`</g>`});
+ o+=`</g>`+L(40,270,560,270,'ink',1);
+ if(s.m==='hor'){o+=T(300,98-t*.42,'horst',{a:'middle',b:1,size:15})+AR(300,300,300,282,'ink')}
+ if(s.m==='gra'){o+=T(300,98,'gravsänka',{a:'middle',b:1,size:15})+AR(300,40,300,70+t*.3,'ink')}
+ if(s.m==='van'){o+=T(306,98,'förkastning',{a:'middle',b:1,size:14})+AR(420,70,420,96+t*.25,'ink')}
+ const ex={hor:'Mittblocket skjuts uppåt: en <b>horst</b>, som Hallandsåsen, Harz och Jurabergen.',gra:'Mittblocket sjunker: en <b>gravsänka</b>, som Vättern och Rhendalen.',van:'Den vanligaste blockförskjutningen: ena sidan av sprickan sjunker. Ofta bildas en brant sluttning.'};
+ return{svg:o,note:ex[s.m]}}});
+
+/* 9 Bergskedjeveckningar */
+add({id:'veckning',ch:1,title:'Bergskedjeveckningar',pages:'s. 60–61',
+controls:[{k:'v',label:'Veckning',min:0,max:100,val:0,fmt:pct,play:1},{k:'e',label:'Erosion',min:0,max:100,val:0,fmt:pct},{k:'ep',type:'seg',label:'Epok',val:'',opts:[['kal','Kaledonisk, forntid',{v:100,e:80}],['var','Variskisk, 300 milj. år',{v:100,e:55}],['alp','Alpin, 60 milj. år',{v:75,e:8}],['','Börja om',{v:0,e:0}]]}],
+facts:['När en platta pressas mot en annan ändrar berggrunden form. <b>Mount Everest</b> blir långsamt högre.','Går veckningen långsamt hinner de nedbrytande krafterna med. En flod kan då skära sig rakt genom bergskedjan.','<b>Kaledoniska</b> veckningen: i början av jordens forntid när Pangea bildades. Kaledoniderna gick genom Norden, Skottland, Grönland och Nordamerikas östsida.','<b>Variskiska (hercyniska)</b>: för ca <b>300 milj. år</b> sedan i Mellaneuropa, bl.a. Frankrike och Tyskland.','<b>Alpina</b>: började för ca <b>60 milj. år</b> sedan och <b>pågår</b> (skalv och vulkaner visar det). Alperna, Himalaya, Anderna, Klippiga bergen.','<b>Överskjutande veck</b>: ett veck stjälper eller skjuts över ett annat längs en förkastning.'],
+draw(s,id){const v=s.v/100,e=s.e/100;let o=R(0,0,600,320,'sky');
+ const bases=[214,196,178,160,142],cols=['st4','st3','st2','st1','sand'];
+ const A=X=>v*100*G((X-300)/(120-v*22))*(1+.22*Math.sin((X-300)/13));
+ const top=i=>X=>bases[i]-A(X)*(1-i*.03);
+ let minT=999;for(let X=100;X<=500;X+=4)minT=Math.min(minT,top(4)(X));
+ const cut=lerp(minT,bases[4],e);
+ o+=`<clipPath id="${id}c"><rect x="0" y="${n(cut)}" width="600" height="${n(320-cut)}"/></clipPath>`;
+ if(e>0)o+=PL(curve(top(4),100,500,4),'ink',1,{dash:'4 4',op:.35});
+ o+=`<g clip-path="url(#${id}c)">`;for(let i=4;i>=0;i--)o+=PG([...curve(top(i),90,510,4),[510,320],[90,320]],cols[i],{s:'onlight',w:.6});o+=`</g>`;
+ const pl=110+v*72,pr=490-v*72;
+ o+=R(pl-90,112,90,208,'rockdark',{rx:5})+R(pr,112,90,208,'rockdark',{rx:5});
+ o+=T(pl-45,160,'Platta',{a:'middle',b:1,c:'ondark'})+T(pr+45,160,'Platta',{a:'middle',b:1,c:'ondark'})+T(pl-45,182,'→',{a:'middle',b:1,c:'ondark',size:18})+T(pr+45,182,'←',{a:'middle',b:1,c:'ondark',size:18});
+ const ep={kal:'<b>Kaledoniska veckningen</b> – mycket gammal (när Pangea bildades). Berget har hunnit nötas ner mycket. Spår i Norden, Skottland, Grönland och Nordamerikas östsida.',var:'<b>Variskiska (hercyniska) veckningen</b> – ca 300 milj. år sedan i Mellaneuropa: Frankrike och Tyskland.',alp:'<b>Alpina veckningen</b> – började för ca 60 milj. år sedan och pågår än: Alperna, Himalaya, Anderna och Klippiga bergen.'};
+ return{svg:o,note:ep[s.ep]||(v<.05?'Lagren ligger vågräta. Dra i Veckning så pressas plattorna ihop.':`Lagren veckas och lyfts upp till en bergskedja.${e>0?' Erosionen nöter ner toppen – den streckade linjen visar hur högt berget var.':''}`)}}});
+
+/* 10 Långsam höjning och sänkning */
+add({id:'isostasi',ch:1,title:'Långsam höjning och sänkning',pages:'s. 61',
+controls:[{k:'e',label:'Berget nöts',min:0,max:100,val:0,fmt:pct,play:1},{k:'i',label:'Inlandsis',min:0,max:100,val:0,fmt:pct}],
+facts:['Plattrörelserna ger en omärklig, långsam <b>höjning eller sänkning</b> av markytan, ofta genom <b>isostatiska</b> rörelser.','Ju högre ett berg är, desto längre ner går dess <b>"rötter"</b>. När berget sakta nöts ner höjs det långsamt – jämför med ett <b>isberg</b>.','Det märks genom att hamnar och farleder blir grundare, eller att man hittar ruiner på havsbotten.','Landhöjningen i Sverige efter istiden beror mest på att <b>inlandsisen var så tung</b> att den tryckte ner landet.'],
+draw(s){const H=95*(1-.72*s.e/100),ice=s.i/100*70,sink=ice*.4,base=150+sink-(1-H/95)*8;let o=R(0,0,600,320,'sky')+R(0,175,600,145,'mantle');
+ const surf=X=>X<340?base-H*G((X-170)/58):base, bot=X=>215+sink+H*1.35*G((X-170)/62)-(1-H/95)*8;
+ o+=band(surf,bot,0,600,'cont');
+ o+=PL(curve(X=>150-95*G((X-170)/58),60,280,4),'ink',1,{dash:'4 4',op:.4});
+ if(ice>1)o+=PG([...curve(X=>base-ice*Math.sqrt(cl(1-((X-475)/120)**2)),355,595,5),[595,base],[355,base]],'ice',{s:'cold',w:1});
+ o+=T(170,Math.min(base-H-10,140),'berg',{a:'middle',b:1})+T(170,bot(170)+18>312?306:bot(170)+18,'"rot"',{a:'middle',c:'ondark',b:1})+T(30,300,'manteln',{c:'ondark'});
+ if(ice>1)o+=T(475,base-ice-8,'inlandsis',{a:'middle',b:1});
+ o+=R(430,12,160,92,'panel',{rx:5,s:'line',w:1})+R(431,46,158,57,'sea')+PG([[488,46],[496,30],[508,36],[518,46],[528,62],[526,92],[502,99],[482,90],[478,60]],'ice',{s:'cold',w:1})+T(440,28,'isberg',{size:11,b:1});
+ return{svg:o,note:`Bergets topp: ${Math.round(H/95*100)} % av ursprunglig höjd. ${s.e>0?'När berget nöts ner blir det lättare och hela blocket <b>höjs långsamt</b>, precis som ett isberg som smälter ovanifrån flyter upp.':'Lägg märke till den djupa roten under berget.'} ${ice>1?'Isens tyngd <b>trycker ner</b> jordskorpan.':''}`}}});
+
+/* 11 Jordskalv */
+add({id:'jordskalv',ch:1,title:'Jordskalv',pages:'s. 62',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:40,fmt:v=>v*2+' s (modell)',play:1}],
+facts:['Jordskalv uppstår när <b>spänningar</b> i jordskorpan löses ut snabbt: vid bergskedjeveckningar, längs friktionszoner och vid vulkanutbrott.','Tidvattnet höjer och sänker skorpan ca en halv meter två gånger per dygn, vilket också kan utlösa spänningar.','<b>Fokus</b> (hypocentrum) = där skalvet sker. <b>Epicentrum</b> = stället på ytan ovanför. Djupaste skalven sker ner till <b>70 km</b> vid kollisionszoner.','<b>P-vågor</b> (primära, longitudinella, förtätningar och förtunningar) är snabbast.','<b>S-vågor</b> (sekundära, transversella, slår i sidled som ett rep) är långsammare och <b>kan inte gå genom vätska</b>, alltså inte genom kärnan.','<b>L-vågor</b> följer ytan, är långsammast men ger <b>störst utslag och skador</b>. Tidsskillnaden mellan P och S visar avståndet.'],
+draw(s,id){const t=s.t*2,cx=175,cy=172,r=128,rc=54,hx=175,hy=60;let o='';
+ const al=Math.asin(rc/(cy-hy)),lt=Math.sqrt((cy-hy)**2-rc*rc);
+ const T1=[hx-lt*Math.sin(al),hy+lt*Math.cos(al)],T2=[hx+lt*Math.sin(al),hy+lt*Math.cos(al)],F1=[hx-420*Math.sin(al),hy+420*Math.cos(al)],F2=[hx+420*Math.sin(al),hy+420*Math.cos(al)];
+ o+=`<clipPath id="${id}e"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath><mask id="${id}m"><circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff"/>${PG([T1,F1,F2,T2],'#000')}<circle cx="${cx}" cy="${cy}" r="${rc}" fill="#000"/></mask>`;
+ o+=C(cx,cy,r,'mantle2',{s:'onlight',w:1});
+ o+=`<g mask="url(#${id}m)">`+C(hx,hy,t*1.8,null,{s:'hot',w:3})+`</g>`;
+ o+=C(cx,cy,rc,'coreout',{s:'onlight',w:1})+T(cx,cy+4,'kärnan',{a:'middle',c:'onlight',size:12});
+ o+=`<g clip-path="url(#${id}e)">`+C(hx,hy,t*3,null,{s:'cold',w:2.5,dash:'7 5'})+`</g>`;
+ const th=t*1.2/r;if(th<Math.PI)[-1,1].forEach(sg=>{const a=Math.PI/2+sg*th;o+=PA(`M${n(cx+(r+4)*Math.cos(a-.09))} ${n(cy-(r+4)*Math.sin(a-.09))} A ${r+4} ${r+4} 0 0 0 ${n(cx+(r+4)*Math.cos(a+.09))} ${n(cy-(r+4)*Math.sin(a+.09))}`,null,{s:'accent',w:5,lc:'round'})});
+ o+=C(hx,hy,6,'magma',{s:'panel',w:2})+T(hx+10,hy+4,'fokus',{size:12,b:1,c:'onlight'})+L(hx,hy,cx,cy-r,'ink',1,{dash:'2 2'})+T(cx,cy-r-8,'epicentrum',{a:'middle',size:12,b:1});
+ const sa=10*Math.PI/180,sx=cx+r*Math.cos(sa),sy=cy-r*Math.sin(sa);o+=PG([[sx,sy-9],[sx-7,sy+4],[sx+7,sy+4]],'ink');
+ const X=v=>345+v/200*240,arr=[['P',51,'cold'],['S',84,'hot'],['L',145,'accent']];
+ o+=R(335,40,258,250,'panel',{rx:5,s:'line',w:1})+T(345,62,'Seismograf vid ▲',{b:1,size:13})+L(345,170,585,170,'line',1);
+ const pts=[];for(let u=0;u<=t;u+=1){const a=1.5+(u>51?11*Math.exp(-(u-51)/22):0)+(u>84?24*Math.exp(-(u-84)/28):0)+(u>145?52*Math.exp(-(u-145)/30):0);pts.push([X(u),170+a*(Math.sin(u*1.9)*.7+Math.sin(u*3.3)*.3)])}
+ if(pts.length>1)o+=PL(pts,'ink',1.3);
+ arr.forEach(([nm,at,c])=>{if(t>=at)o+=L(X(at),80,X(at),262,c,1.5,{dash:'3 3'})+T(X(at),276,nm,{a:'middle',b:1,c})});
+ o+=T(345,96,'P-vågor ',{size:11,c:'cold',b:1})+T(395,96,'S-vågor',{size:11,c:'hot',b:1})+T(445,96,'L-vågor',{size:11,c:'accent',b:1});
+ const msg=t<51?'Vågorna sprids åt alla håll från fokus. <b>P-vågorna</b> (streckade) är snabbast.':t<84?'<b>P-vågorna</b> har nått seismografen först. De går även genom kärnan. S-vågorna stoppas av den flytande kärnan.':t<145?'Nu kommer <b>S-vågorna</b>. Tiden mellan P och S visar hur långt bort skalvet var.':'Sist kommer <b>L-vågorna</b> längs ytan. De är långsammast men ger störst utslag och skador.';
+ return{svg:o,note:msg}}});
+
+/* 12 Richter och Mercalli */
+const RT=[[0,3,'< 3,0','I','Registreras bara på seismografer','> 1 000 000'],[3,5.5,'3,0–5,4','II–V','Liten till måttlig, fönster skallrar','30 000'],[5.5,6.2,'5,5–6,1','VI–VII','Kraftig, en del skador','500'],[6.2,7,'6,2–6,9','VIII–IX','Våldsam, hus störtar samman','100'],[7,8,'7,0–7,9','X–XI','Stor ödeläggelse','20'],[8,9.6,'> 8,0','XII','Fullständig ödeläggelse','vart 2:a–10:e år']];
+add({id:'richter',ch:1,title:'Richter- och Mercalliskalorna',pages:'s. 63',
+controls:[{k:'a',label:'Skalv A',min:0,max:9.5,step:.1,val:4,fmt:v=>'M '+v.toFixed(1).replace('.',',')},{k:'b',label:'Skalv B',min:0,max:9.5,step:.1,val:7,fmt:v=>'M '+v.toFixed(1).replace('.',','),play:1}],
+facts:['<b>Richterskalan</b> (Charles Richter, USA) är vanligast. Den går från 0 till 9,5 och är <b>logaritmisk</b>.','Ett steg = <b>10 gånger</b> större svängningsvidd (amplitud). Tre steg = 1 000 gånger.','Energin: ett steg ≈ <b>30 gånger</b>, två steg ≈ <b>1 000 gånger</b>. Magnitud 9 ≈ hela Sveriges energiförbrukning under ett år.','<b>Mercalliskalan</b> (Giuseppe Mercalli, Italien) visar verkan i praktiken: <b>tolv steg</b> med romerska siffror.','Över en miljon skalv per år – ett varannan minut. Tokyo väntar på en katastrof som 1923, San Francisco efter 1906.'],
+draw(s){const X=m=>40+m/9.5*520;let o='';
+ RT.forEach((r,i)=>o+=R(X(r[0]),52,X(Math.min(r[1],9.5))-X(r[0]),14,i%2?'st2':'st1'));
+ o+=L(40,66,560,66,'ink',1.5);for(let m=0;m<=9;m++)o+=L(X(m),66,X(m),72,'ink',1)+T(X(m),86,m,{a:'middle',size:11,m:1});
+ [['a','A','cold'],['b','B','hot']].forEach(([k,lb,c])=>o+=PG([[X(s[k]),50],[X(s[k])-8,36],[X(s[k])+8,36]],c)+T(X(s[k]),30,lb,{a:'middle',b:1,c}));
+ o+=T(40,22,'Richter (magnitud)',{size:12,c:'muted'});
+ const hd=[['Richter',20],['Mercalli',100],['Skadeverkan',170],['Antal per år',455]];hd.forEach(h=>o+=T(h[1],116,h[0],{b:1,size:12}));
+ const inR=(m,r)=>m>=r[0]&&m<r[1];
+ RT.forEach((r,i)=>{const y=126+i*30,ha=inR(s.a,r),hb=inR(s.b,r);if(ha||hb)o+=R(10,y,580,28,ha&&hb?'panel2':ha?'cold':'hot',{op:ha&&hb?1:.22,rx:3});o+=T(20,y+19,r[2],{size:12.5,m:1})+T(100,y+19,r[3],{size:12.5,m:1})+T(170,y+19,r[4],{size:12.5})+T(455,y+19,r[5],{size:12.5,m:1})});
+ const d=Math.abs(s.b-s.a),amp=Math.pow(10,d),en=Math.pow(31.6,d),big=s.b>=s.a?'B':'A';
+ return{svg:o,note:d<.05?'Skalven är lika starka.':`Skalv ${big} har <b>${fmtN(amp)} gånger</b> större svängningsvidd och ungefär <b>${fmtN(en)} gånger</b> mer energi (${fmtN(d)} steg på skalan).`}}});
+
+/* 13 Orientens kniptång */
+add({id:'kniptang',ch:1,title:'Orientens kniptång',pages:'s. 64',
+controls:[{k:'t',label:'Tryck',min:0,max:100,val:35,fmt:pct,play:1}],
+facts:['<b>Afrikanska plattan</b> trycker från söder mot <b>eurasiska plattan</b> och får hjälp av <b>indisk-australiska</b> plattan.','I kläm i sydvästra Asien: <b>arabiska, iranska och turkiska</b> plattorna.','<b>Turkiska plattan</b> rör sig sakta västerut för att komma ur kniptången och "skaver" som San Andreasförkastningen.','Följden: bergskedjeveckningar, jordskalv och vulkanutbrott. Tiotusentals döda varje år i medeltal.','<b>Bam</b> i sydöstra Iran: 26 december 2003, magnitud <b>6,8</b>. Ca 90 % av lerbyggnaderna raserades, ca <b>30 000</b> omkom.'],
+draw(s){const t=s.t/100,ox=t*60;let o=R(0,0,600,320,'line');
+ const pl=[['Eurasiska plattan',[[0,0],[600,0],[600,92],[0,92]],'cont',[300,40]],['Turkiska',[[160-ox,100],[300-ox,100],[300-ox,152],[160-ox,152]],'st2',[230-ox,131]],['Iranska',[[318,100],[525,100],[525,162],[318,162]],'st3',[400,128]],['Arabiska',[[250,172],[402,172],[422,262],[262,262]],'sand',[335,222]],['Afrikanska plattan',[[0,172],[238,172],[250,320],[0,320]],'st1',[110,252]],['Indisk-australiska',[[440,180],[600,180],[600,320],[432,320]],'st4',[520,262]]];
+ pl.forEach(p=>o+=PG(p[1],p[2],{s:'panel',w:2})+T(p[3][0],p[3][1],p[0],{a:'middle',b:1,size:12,c:'onlight'}));
+ for(let i=0;i<14;i++){const x=150+i*29,h=4+t*16*(.6+.4*Math.sin(i*1.7));o+=PG([[x,93],[x+14,93-h],[x+28,93]],'rockdark')}
+ o+=AR(110,300,110,222-t*20,'ink')+AR(330,300,330,240-t*12,'ink')+AR(540,305,505,215-t*12,'ink')+AR(220-ox,170,160-ox-t*20,170,'ink');
+ const r=rng(3);for(let i=0;i<Math.round(t*26);i++){const side=r();const p=side<.33?[150+r()*400,96+r()*6]:side<.66?[300+r()*20,105+r()*60]:[245+r()*170,165+r()*8];o+=C(p[0],p[1],3,'magma',{s:'panel',w:.8})}
+ o+=C(490,148,5,'ink')+T(482,152,'Bam',{a:'end',size:12,b:1,c:'onlight'});
+ return{svg:o,note:`Afrikanska, arabiska och indisk-australiska plattorna trycker norrut. Turkiska plattan pressas västerut (${Math.round(ox)} enheter). Röda prickar = jordskalv. Bergen längs gränsen veckas upp.`}}});
+
+/* 14 Vandrande jordskalv */
+const WQ=[['Azorerna','1 jan 1980','6,7',62,158,1],['El Asnam, Algeriet','10 okt 1980','7,4',238,182,1],['Neapel','23 nov 1980','6,7',316,117,0],['Korintviken, Grekland','4 mars 1981','6,7',368,155,1],['Södra Iran','11 juni 1981','6,6',560,250,0]];
+add({id:'vandrande',ch:1,title:'Vandrande jordskalv',pages:'s. 65',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:0,fmt:v=>WQ[Math.min(4,Math.floor(v/25+.001))][1],play:1}],
+facts:['Jordskalven verkar kunna <b>"vandra"</b> längs plattgränserna.','I Europa och Asien rör sig skalven från <b>väster mot öster</b>.','Serien 1980–81: <b>Azorerna</b> (1 jan 1980, M 6,7) → <b>El Asnam</b>, Algeriet (10 okt, M 7,4) → <b>Neapel</b> (23 nov, M 6,7) → <b>Korintviken</b>, Grekland (4 mars 1981, M 6,7) → <b>södra Iran</b> (11 juni 1981, M 6,6).','En annan serie: <b>Etna</b> på Sicilien → sydöstra Turkiet sju månader senare → troligen Bam, på samma spricka.','Sådana serier kan ge bättre prognoser i framtiden.'],
+draw(s){const pos=s.t/25;let o=R(0,0,600,320,'sea',{op:.5});
+ o+=T(300,40,'Eurasiska plattan',{a:'middle',b:1,c:'muted'})+T(200,290,'Afrikanska plattan',{a:'middle',b:1,c:'muted'});
+ o+=PL(WQ.map(q=>[q[3],q[4]]),'ink',2,{dash:'6 5',op:.6});
+ WQ.forEach((q,i)=>{const on=pos>=i-.001,r=5+(parseFloat(q[2].replace(',','.'))-6)*7;o+=C(q[3],q[4],r,on?'magma':'panel',{s:'ink',w:1.2,op:on?1:.6});
+  const y=q[5]?q[4]+r+16:q[4]-r-24;o+=T(q[3],y,q[0],{a:'middle',b:1,size:12,op:on?1:.45})+T(q[3],y+15,on?`${q[1]} · M ${q[2]}`:'',{a:'middle',size:11,m:1})});
+ const i=Math.min(3,Math.floor(pos)),f=pos-i,a=WQ[i],b=WQ[i+1];
+ if(pos<4){const px=lerp(a[3],b[3],f),py=lerp(a[4],b[4],f);for(let k=0;k<3;k++)o+=C(px,py,6+k*7,null,{s:'accent',w:2,op:.9-k*.3})}
+ o+=AR(220,20,380,20,'ink')+T(400,24,'väster → öster',{size:12,b:1});
+ const cur=WQ[Math.min(4,Math.round(pos))];
+ return{svg:o,note:`<b>${cur[0]}</b>, ${cur[1]}: magnitud ${cur[2]}. "Pulsen" vandrar längs plattgränsen från väster mot öster.`}}});
+
+/* 15 Olja */
+add({id:'olja',ch:1,title:'Olja',pages:'s. 65',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:0,fmt:v=>v<30?'kritatiden':v<60?'begravning':v<85?'veckning':'idag',play:1}],
+facts:['I sydvästra Asien finns <b>mer än hälften</b> av världens oljetillgångar.','Oljan bildades under jordens medeltid, främst under <b>krita</b>, i ett stabilt grundhav vid nuvarande <b>Persiska viken</b>, som då var mycket större.','<b>Mikroorganismer</b> levde i ytvattnet. När de dött sjönk de till botten och begravdes. Avlagringarna omvandlades till olja.','Plattornas kollisioner och veckningar ger arabiska plattan <b>slagsida</b>. Oljan rör sig uppåt till fickor vid veckningarna.','I hålrummen: <b>gas överst</b>, <b>olja</b> närmast nedanför och <b>vatten</b> längst ner.'],
+draw(s,id){const t=s.t/100;let o=R(0,0,600,320,'sky');
+ const m1=sm(.08,.3,t),m2=sm(.28,.45,t),m3=sm(.4,.55,t),A=sm(.55,.8,t)*58;
+ const f=X=>A*G((X-300)/130);
+ const rTop=X=>250-40*m1-f(X),cTop=X=>250-40*m1-30*m2-f(X),vTop=X=>250-40*m1-30*m2-34*m3-f(X);
+ const seaOp=1-sm(.5,.62,t),floor=250-40*m1-30*m2-34*m3;
+ if(seaOp>0)o+=R(0,40,600,floor-40,'sea',{op:seaOp});
+ o+=R(0,250,600,70,'st4');
+ if(m1>0)o+=band(rTop,X=>250,0,600,'sand');
+ if(m2>0)o+=band(cTop,rTop,0,600,'clay');
+ if(m3>0)o+=band(vTop,cTop,0,600,'st2');
+ const r=rng(11);
+ if(t<.5)for(let k=0;k<30;k++){const x=r()*600,y=50+((r()*200+t*900)%Math.max(10,floor-55));o+=C(x,y,2,'grass',{op:seaOp})}
+ if(t>=.08&&t<.75)for(let k=0;k<40;k++){const x=r()*600,y=rTop(x)+6+r()*28;if(y<250)o+=C(x,y,1.8,'oil',{op:.7})}
+ const mg=sm(.7,.9,t);
+ if(mg>0){const cx=300,top=rTop(cx);o+=`<clipPath id="${id}r">${PG([...curve(rTop,150,450,4),[450,250],[150,250]],'#000')}</clipPath><g clip-path="url(#${id}r)">`+R(150,top,300,10*mg,'gas')+R(150,top+10*mg,300,16*mg,'oil')+R(150,top+26*mg,300,40,'water',{op:.75*mg})+`</g>`}
+ if(t>.88){const y=vTop(300);o+=L(300,y-50,300,rTop(300)+12,'rockdark',3)+R(270,y-20,60,8,'rockdark')+L(285,y-20,300,y-50,'rockdark',3)+L(300,y-50,330,y-40,'rockdark',3)+C(330,y-40,5,'rockdark')}
+ const st=t<.3?'Kritatiden: ett grunt, stabilt hav. <b>Mikroorganismer</b> lever i ytvattnet, dör och sjunker till botten.':t<.55?'Avlagringarna <b>begravs</b> under nya lager och omvandlas så småningom till olja.':t<.8?'Plattorna kolliderar och lagren <b>veckas</b>. Oljan börjar röra sig uppåt.':'Oljan har samlats i fickan vid veckningen: <b>gas överst, olja i mitten, vatten längst ner</b>. Idealiskt för utvinning.';
+ return{svg:o,note:st}}});
+
+/* 16 Hot spots */
+const ISL=[['Fuerteventura / Lanzarote',20],['Gran Canaria',14],['Teneriffa',10],['Hierro',2]];
+add({id:'hotspots',ch:1,title:'Hot spots – Hawaii och Kanarieöarna',pages:'s. 66',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:30,fmt:v=>v==100?'nu':fmtN(20-v*.2)+' milj. år sedan',play:1}],
+facts:['Många vulkanöar ligger <b>inte</b> nära plattgränser. De ligger över <b>hetfläckar (hot spots)</b>.','Het magma (<b>magmaplymer</b>) stiger i konvektionsströmmar från astenosfären och smälter hål på oceanbottenplattan.','Basaltisk lava breder ut sig snabbt → ofta en <b>sköldvulkan</b> med platt topp.','Hetfläcken kan ligga still i <b>miljontals år</b>. Plattan rör sig några cm per år, så vulkanen förs bort och <b>slocknar</b>. En ny vulkan bildas över hetfläcken.','Så bildades <b>Hawaii</b> (Stilla havet) och <b>Kanarieöarna</b> (Atlanten). Öarnas ålder visar åt vilket håll havsbotten rört sig.'],
+draw(s){const T0=20-s.t*.2,hx=110,sp=22;let o=R(0,0,600,110,'sky')+R(0,110,600,52,'sea')+R(0,162,600,30,'ocrust')+R(0,192,600,128,'mantle2');
+ o+=PA(`M${hx-34} 320 Q${hx-10} 250 ${hx-8} 192 L ${hx+8} 192 Q${hx+10} 250 ${hx+34} 320Z`,'magma',{op:.9})+E(hx,262,34,22,'magma',{op:.85});
+ for(let k=0;k<14;k++){const x=((k*46+(20-T0)*sp)%640)-20;o+=L(x,166,x,188,'ondark',1.4,{op:.45})}
+ ISL.forEach(([nm,a],i)=>{if(T0>a)return;const age=a-T0,x=hx+age*sp,act=x-hx<36,h=Math.min(1,age/1.2)*(i==0?72:i==1?82:i==2?96:66)*(1-.012*age);
+  o+=PG([[x-56,162],[x-14,162-h],[x+14,162-h],[x+56,162]],act?'rockdark':'rock',{s:'onlight',w:.8});
+  if(act)o+=L(x,162-h,x,192,'magma',3)+C(x,162-h-6,5,'magma');
+  if(162-h<112)o+=T(x,162-h-14,nm,{a:'middle',size:11,b:1})});
+ o+=AR(260,180,360,180,'ondark')+T(hx,312,'het fläck',{a:'middle',b:1,c:'onlight'})+T(380,206,'oceanbottenplattan rör sig →',{size:11,c:'onlight'});
+ const act=ISL.filter(([,a])=>a>=T0&&(a-T0)*sp<36).map(q=>q[0]);
+ return{svg:o,note:act.length?`Över hetfläcken är <b>${act.join(', ')}</b> aktiv. Äldre öar har förts österut och slocknat.`:'Ingen ö ligger just nu över hetfläcken. En ny vulkan kommer snart att bildas.'}}});
+
+/* 17 Hetfläckar under kontinenter */
+add({id:'hetflackar',ch:1,title:'Hetfläckar under kontinenter',pages:'s. 66',
+controls:[{k:'m',type:'seg',label:'Exempel',val:'d',opts:[['d','Deccan, Indien'],['c','Columbiaplatån, USA']]},{k:'t',label:'Utbrott',min:0,max:100,val:40,fmt:v=>Math.floor(v/10)+' lager',play:1}],
+facts:['Aktiva vulkaner är sällsynta på kontinenterna, utom i litosfärplattornas utkanter.','Stora <b>basaltiska lavafält</b> på kontinenterna ses som bevis för hetfläckar under plattan.','<b>Deccan</b>, den indiska högslätten, bildades genom vulkanutbrott för <b>mer än 60 milj. år</b> sedan.','<b>Columbiaplatån</b> i nordvästra USA har en yta lika stor som <b>Island</b>. Magma strömmade ut i <b>mer än 10 milj. år</b> och bildade ett par kilometer tjockt lavafält.'],
+draw(s){let o=R(0,0,600,320,'sky')+R(0,215,600,105,'mantle2')+R(0,170,600,50,'cont');
+ o+=PA(`M262 320 Q290 260 296 220 L 304 220 Q310 260 338 320Z`,'magma',{op:.9});
+ const N=s.t/10;let top=170;
+ for(let i=0;i<Math.ceil(N);i++){const p=cl(N-i),w=60+p*440,th=8;o+=PG([[300-w/2,top],[300-w/2+10,top-th],[300+w/2-10,top-th],[300+w/2,top]],i%2?'basalt2':'basalt');top-=p*th}
+ if(N>0&&N<10)o+=L(300,220,300,top+1,'magma',3);
+ o+=T(20,200,'kontinentplattan',{size:12,c:'onlight'})+T(300,300,'het fläck',{a:'middle',b:1,c:'onlight'});
+ if(N>=1)o+=T(300,top-10,'basaltiska lavafält',{a:'middle',b:1});
+ const nm=s.m==='d'?'Deccan (indiska högslätten), mer än 60 milj. år sedan':'Columbiaplatån, NV USA – yta som Island, utbrott i mer än 10 milj. år';
+ return{svg:o,note:`<b>${nm}</b>. Lava strömmar upp gång på gång och lägger lager på lager. ${N>=9?'Nu är lavafältet <b>ett par kilometer tjockt</b>.':''}`}}});
+
+/* 18 Heta källor */
+add({id:'hetakallor',ch:1,title:'Heta källor',pages:'s. 66',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:30,fmt:v=>v<70?'uppvärmning':'utbrott',play:1}],
+facts:['Där vatten, vattenånga och gaser strömmar ut kan det uppstå <b>heta källor</b>.','I områden med lugnare vulkanisk aktivitet kan <b>mineralhaltigt vatten</b> flöda fram – även långt från plattgränserna.','<b>Gejsrar (springkällor)</b>: vatten från ytan sipprar ner, möter hög underjordisk värme och får häftiga utbrott.','Stora turistattraktioner på <b>Island</b>, i <b>Yellowstone</b> (USA) och på <b>Nya Zeelands nordö</b>.'],
+draw(s){const p=s.t/100;let o=R(0,0,600,140,'sky')+R(0,140,600,180,'rock')+E(300,320,200,60,'magma',{op:.9})+R(0,230,600,60,'hot',{op:.25});
+ const fill=sm(0,.6,p),heat=sm(.15,.68,p),erupt=p>.7?Math.sin(Math.PI*(p-.7)/.3):0;
+ o+=PA('M292 140 L292 200 Q270 210 272 232 Q275 252 300 255 Q325 252 328 232 Q330 210 308 200 L308 140Z','rockdark');
+ const lvl=255-fill*112;o+=`<clipPath id="gk"><path d="M294 140 L294 202 Q274 211 275 232 Q278 250 300 252 Q322 250 325 232 Q326 211 306 202 L306 140Z"/></clipPath><g clip-path="url(#gk)">`+R(260,lvl,80,260-lvl,heat>.5?'hot':'water',{op:.6+.4*Math.abs(heat-.5)*2})+`</g>`;
+ for(let k=0;k<4;k++){const x=150+k*100,y=150+((p*400+k*30)%70);if(x!==300&&erupt===0)o+=AR(x,y,x+(300-x)*.15,y+14,'water',1.6)}
+ if(erupt>0){const h=erupt*130;o+=R(294,140-h,12,h,'water',{op:.85});for(let k=0;k<8;k++)o+=C(300+(k%2?1:-1)*(8+k*3),140-h+k*8,5+k,'snow',{op:.7,s:'line',w:.5})}
+ o+=R(520,150,24,120,'panel',{s:'ink',w:1})+R(520,270-heat*120,24,heat*120,'hot')+T(532,290,'tryck',{a:'middle',size:11,c:'ondark'});
+ o+=T(150,135,'vatten sipprar ner',{a:'middle',size:12})+T(80,262,'het berggrund',{size:12,c:'onlight',b:1})+T(300,308,'magma',{a:'middle',b:1,c:'onlight'});
+ return{svg:o,note:erupt>0?'<b>Utbrott!</b> Det heta vattnet och ångan sprutar upp ur gejsern.':'Vatten sipprar ner, värms av den heta berggrunden och trycket stiger.'}}});
+
+/* 19 Vulkaner (VEI) */
+const VEI=[['Icke explosivt','< 0,1','< 10⁴','Kilaueas "normala" utbrott',.1],['Litet','0,1–1','10⁴–10⁶','Strombolis "normala" utbrott',.8],['Medelstort','1–5','10⁶–10⁷','Galeras 1992',4],['Medelstort–stort','3–15','10⁷–10⁸','Hemön 1973',12],['Stort','10–25','10⁸–10⁹','Hekla 1947 (VEI 4–5: Mt Saint Helens 1980, Rabaul 1994)',20],['Mycket stort','> 25','10⁹–10¹⁰','Pinatubo 1991',30],['Mycket stort','ca 80','10¹⁰–10¹¹','Krakatau 1883',80],['Mycket stort','?','10¹⁰–10¹¹','Thera 1500 f.Kr., Tambora 1815',null],['Troligen global påverkan','?','> 10¹²','Toba 75 000 f.Kr.',null]];
+add({id:'vulkaner',ch:1,title:'Vulkaner',pages:'s. 67',
+controls:[{k:'v',label:'VEI',min:0,max:8,step:1,val:5,fmt:v=>'VEI '+v,play:1}],
+facts:['Av jordens tusentals vulkaner har <b>upp till 600</b> varit eller är aktiva. Sammanlagt ca <b>60 utbrott per år</b>.','<b>Vulkanexplosionsindex (VEI)</b> går från 0 till 8, en motsvarighet till Richterskalan.','VEI bygger på <b>rökpelarens höjd</b> och <b>utbrottsprodukternas volym</b>.','<b>Pinatubo</b> (Filippinerna) 1991: VEI 5 – det största på mer än 100 år.','<b>Kilauea</b> är den yngsta vulkanen på Hawaii. Där lockar de mindre utbrotten publik.'],
+draw(s){const v=Math.round(s.v),r=VEI[v];let o=R(0,0,600,320,'sky');
+ const Y=km=>280-230*Math.log10(1+km)/Math.log10(81);
+ [1,5,15,25,80].forEach(k=>o+=L(520,Y(k),532,Y(k),'ink',1)+T(538,Y(k)+4,k+' km',{size:11,m:1}));o+=L(526,Y(80),526,280,'ink',1);
+ const h=r[4]==null?272:280-Y(r[4]);const top=280-h,w=8+v*8;
+ if(v>0){o+=PG([[300-w*.4,280-60],[300-w,top+w*.6],[300+w,top+w*.6],[300+w*.4,280-60]],'ash',{op:.75});o+=E(300,top+w*.5,w*1.6,w*.7,'ash',{op:.85})}else o+=PA('M300 220 Q330 200 360 215','magma',{op:0})+PA('M300 224 Q350 240 420 270',null,{s:'magma',w:5,lc:'round'});
+ if(r[4]==null)o+=T(300,24,'?',{a:'middle',b:1,size:22,c:'ondark'});
+ o+=PG([[150,290],[285,222],[315,222],[450,290]],'rockdark')+R(0,288,600,32,'rock')+C(300,222,6,'magma');
+ o+=T(20,30,`VEI ${v} · ${r[0]}`,{b:1,size:16})+T(20,52,`Pelarhöjd: ${r[1]} km`,{size:13,m:1})+T(20,72,`Volym: ${r[2]} m³`,{size:13,m:1});
+ return{svg:o,note:`<b>Exempel:</b> ${r[3]}.`}}});
+
+/* 20 Vulkaniska produkter */
+add({id:'produkter',ch:1,title:'Vulkaniska produkter',pages:'s. 68–69',
+controls:[{k:'m',type:'seg',label:'Produkt',val:'rep',opts:[['rep','Replava'],['blo','Blocklava'],['kud','Kuddlava'],['pim','Pimpsten'],['glo','Glödmoln'],['sla','Slamskred']]},{k:'t',label:'Utbrott',min:0,max:100,val:60,fmt:pct,play:1}],
+facts:['<b>Replava</b>: lättflytande, basisk, lite kvarts. <b>Blocklava</b>: trögflytande, sur, mycket kvarts.','<b>Kuddlava</b> bildas på havsbotten vid spridningszonerna. Västmannaöarna söder om Island: <b>Surtsey</b> bildades i början av 1960-talet. <b>Hemön</b> hade varit slocknad i tusentals år men fick utbrott 1973.','Stenar, lavastycken och vulkaniskt glas kastas upp. <b>Pimpsten</b> innehåller så mycket gas att den flyter.','Gaser: koldioxid och svavelhaltiga gaser, giftiga för växter. Heta <b>glödmoln</b> dödade en hel stad vid Mont Pelées utbrott på Martinique <b>1902</b>.','Aska och vatten kan bli <b>slam</b> som dränker åkrar och samhällen i dalar.','Hawaiis lava är lättflytande: i Kalapana 1990 hann inte bussen undan.'],
+draw(s){const t=s.t/100,m=s.m;let o=R(0,0,600,320,'sky');
+ if(m==='kud'){o+=R(0,40,600,280,'sea')+PG([[0,300],[250,250],[300,230],[350,250],[600,300],[600,320],[0,320]],'ocrust');
+  const N=Math.round(t*18);const r=rng(5);for(let i=0;i<N;i++){const row=Math.floor(i/6),col=i%6,x=255+col*18+(row%2)*9,y=232-row*13;o+=E(x,y,10,7,'basalt2',{s:'ondark',w:.6});if(i===N-1)o+=E(x,y,10,7,'magma',{op:.7})}
+  o+=L(0,40,600,40,'seadeep',2)+T(300,300,'spridningszon på havsbotten',{a:'middle',c:'ondark',size:12});
+  return{svg:o,note:'Uppströmmande lava stelnar under vattnet i form av <b>stora kuddar</b>. Så bildas kuddlava vid spridningszonerna.'}}
+ const cone=[[130,262],[285,112],[315,112],[470,262]];o+=R(0,262,600,58,'grass',{op:.7});
+ if(m==='pim')o+=R(430,262,170,58,'sea');
+ o+=PG(cone,'rockdark')+R(285,108,30,6,'magma');
+ if(m==='sla'){const snow=1-sm(0,.35,t);o+=PG([[285-30*snow,112+30*snow],[285,112],[315,112],[315+30*snow,112+30*snow]],'snow',{op:snow});
+  const p=[[290,120],[200,200],[150,250],[60,270],[0,276]],l=plen(p)*sm(.25,1,t);if(l>1)o+=PL(partial(p,l),'mud',10,{lc:'round'});
+  [[40,262],[75,262]].forEach(([x,y])=>o+=R(x-10,y-14,20,14,l>230?'mud':'panel',{s:'ink',w:1})+PG([[x-12,y-14],[x,y-24],[x+12,y-14]],'accent'));
+  return{svg:o,note:'Snön smälter och blandas med aska till <b>slam</b> som rinner ner i dalen och kan dränka åkrar och samhällen.'}}
+ if(m==='glo'){const p=t;for(let k=0;k<6;k++){const u=cl(p-k*.05),x=lerp(320,600,u),y=lerp(118,250,Math.min(1,u*1.3));if(u>0)o+=C(x,y-10,18+k*4,'ash',{op:.75})+C(x,y-6,8,'magma',{op:.4})}
+  [[520,262],[555,262]].forEach(([x,y])=>o+=R(x-10,y-14,20,14,p>.75?'ash':'panel',{s:'ink',w:1})+PG([[x-12,y-14],[x,y-24],[x+12,y-14]],p>.75?'ash':'accent'));
+  return{svg:o,note:'Ett hett <b>glödmoln</b> av gaser och aska rusar nerför sluttningen. Vid Mont Pelée på Martinique 1902 dödades befolkningen i en hel stad.'}}
+ if(m==='pim'){const N=Math.round(t*14),r=rng(9);for(let i=0;i<N;i++){const u=cl(t*2.2-i*.12),x=lerp(300,445+r()*140,u),y=lerp(108,268,u)-Math.sin(u*Math.PI)*110;o+=E(x,y,5+r()*3,4,'kalk',{s:'rockdark',w:.8})}
+  return{svg:o,note:'<b>Pimpsten</b> kastas ut. Den innehåller så mycket gas att den flyter på vattnet.'}}
+ const path=[[300,112],[340,150],[400,210],[470,262],[600,265]],rep=m==='rep',max=rep?plen(path):150,l=max*t;
+ o+=PL(partial(path,l),'magma',rep?6:18,{lc:'round'});if(!rep&&l>10)for(let k=0;k<l;k+=16){const p=along(path,k);o+=C(p[0]+3,p[1]-6,6,'basalt2',{op:.8})}
+ return{svg:o,note:rep?'<b>Replava</b> är lättflytande och basisk (lite kvarts). Den rinner snabbt och långt.':'<b>Blocklava</b> är trögflytande och sur (mycket kvarts). Den rör sig långsamt och blir tjock och klumpig.'}}});
+
+/* 21 Vulkantyper */
+add({id:'vulkantyper',ch:1,title:'Vulkantyper',pages:'s. 69',
+controls:[{k:'q',label:'Kvartshalt',min:0,max:100,val:15,fmt:pct,play:1},{k:'w',label:'Vattenhalt',min:0,max:100,val:20,fmt:pct}],
+facts:['Lavans <b>kvarts- och vattenhalt</b> avgör vilken typ av vulkan som bildas.','Kvartsfattig, lättflytande lava → ganska låga <b>sköld- eller platåvulkaner</b>.','Kvartsrik, trögflytande lava → en brant <b>kägelvulkan</b> med omväxlande lava- och asklager.','Lava rik på både kvarts och vatten → <b>explosionsvulkan</b>. Om stelnad lava bildar en propp i kratern kan utbrottet bli mycket häftigt, t.ex. <b>Krakatau</b> vid Java 1883.','<b>Eyjafjallajökull</b> på Island 2010: askmolnet spreds över Europa och stoppade flyget i flera dagar.'],
+draw(s,id){const q=s.q/100,w=s.w/100,h=50+q*150,half=260-q*165,base=272,ex=q>.65&&w>.65;let o=R(0,0,600,320,'sky')+R(0,base,600,48,'rock');
+ const prof=X=>{const u=Math.min(1,Math.abs(X-300)/half);return base-h*((1-q)*(1-u*u)+q*Math.pow(1-u,1.5))};
+ const cut=ex?base-h*.62:0;
+ o+=`<clipPath id="${id}v"><rect x="0" y="${n(cut)}" width="600" height="${n(320-cut)}"/></clipPath><g clip-path="url(#${id}v)">`+PG([...curve(prof,300-half,300+half,4)],'rockdark');
+ if(q>.4)for(let i=1;i<5;i++){const f=1-i*.17;o+=PL(curve(X=>base-(base-prof(X))*f,300-half*f,300+half*f,4),i%2?'ash':'basalt2',3,{op:.9})}
+ o+=`</g>`+L(300,base,300,ex?cut:base-h,'magma',4)+E(300,base+28,60,14,'magma');
+ if(ex){const r=rng(2);for(let k=0;k<7;k++)o+=C(300+(r()-.5)*140,cut-30-r()*90,22+r()*20,'ash',{op:.8});for(let k=0;k<10;k++)o+=R(300+(r()-.5)*260,cut-r()*150,6,6,'basalt')}
+ const typ=q<.35?'Sköld- eller platåvulkan':ex?'Explosionsvulkan':'Kägelvulkan';
+ o+=T(20,30,typ,{b:1,size:17});
+ return{svg:o,note:q<.35?'Kvartsfattig, <b>lättflytande</b> lava rinner långt och bygger en låg, bred vulkan.':ex?'Lavan är rik på <b>både kvarts och vatten</b>. Trycket spränger kratern: ett mycket häftigt utbrott, som Krakatau 1883.':'Kvartsrik, <b>trögflytande</b> lava bygger en brant kägelvulkan med omväxlande lava- och asklager.'+(q>.65?' Höj vattenhalten för att se en explosion.':'')}}});
+
+/* 22 Övervakning */
+add({id:'overvakning',ch:1,title:'Plattgränser och vulkaner övervakas',pages:'s. 70',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:55,fmt:v=>v==100?'skalvet':Math.round(30-v*.3)+' dagar kvar',play:1}],
+facts:['Vulkaner och plattgränser övervakas med <b>seismografer, satelliter</b> m.m. Man studerar också äldre anteckningar för att se mönster.','Tecken före ett skalv: <b>små förskalv</b> som kommer allt tätare, djur som reagerar (husdjur i Kina, <b>elefanter</b> flyttar till säkrare platser), <b>fiskar</b> kan känna vibrationer en månad i förväg, ökad <b>radonhalt</b> och metaller i markvattnet.','Skalv kan också utlösas av ras, skred och mänsklig aktivitet som <b>dammbyggen</b>.','De flesta dör av nedrasade byggnader och bränder. Ny byggteknik klarar måttliga skalv. I Japan finns skyddsrum vid "opålitliga" vulkaner.','Följder: sjunkande fastighetspriser, svårare att få försäkring och banklån, människor tvingas flytta.','<b>Izmit, Turkiet 1999</b>: ca 20 000 döda, 600 000 hemlösa, 22 md euro (11 % av Turkiets BNP).'],
+draw(s){const d=30-s.t*.3,X=v=>40+(30-v)/30*520;let o='';
+ o+=R(30,20,540,110,'panel',{rx:5,s:'line',w:1})+T(40,40,'Seismograf',{b:1,size:12})+L(40,90,560,90,'line',1);
+ const r=rng(4);const ev=[];for(let i=0;i<60;i++)ev.push(30*Math.pow(r(),2.4));
+ ev.forEach(e=>{if(e>=d)o+=L(X(e),90-4-r()*14,X(e),90+4+r()*14,'ink',1.2)});
+ if(s.t>=99.5)o+=L(X(0),26,X(0),126,'magma',4);
+ [30,20,10,0].forEach(v=>o+=T(X(v),122,v?v+' d':'skalv',{a:'middle',size:10,m:1,c:'muted'}));
+ const rad=20+70*Math.pow(s.t/100,2);o+=R(30,150,150,150,'panel',{rx:5,s:'line',w:1})+T(40,170,'Radonhalt',{b:1,size:12})+R(90,180,30,110,'panel2')+R(90,290-rad*1.1,30,rad*1.1,'accent');
+ o+=R(200,150,370,150,'panel',{rx:5,s:'line',w:1})+T(210,170,'Djur reagerar',{b:1,size:12});
+ const fx=s.t>0?Math.sin(s.t*.9)*6:0;o+=R(215,190,150,95,'sea',{rx:6,op:.6});for(let k=0;k<3;k++){const x=250+k*40+fx*(k%2?1:-1),y=220+k*18;o+=E(x,y,12,6,'st2')+PG([[x+11,y],[x+19,y-6],[x+19,y+6]],'st2')}
+ o+=T(290,280,'fiskar',{a:'middle',size:11,c:'ondark'});
+ const ex=380+sm(40,95,s.t)*130;for(let k=0;k<2;k++){const x=ex+k*42;o+=E(x,252,18,12,'rock')+C(x+18,244,8,'rock')+L(x+24,246,x+28,262,'rock',3)+L(x-10,262,x-10,272,'rock',4)+L(x+10,262,x+10,272,'rock',4)}
+ o+=T(470,190,'elefanter → säkrare plats',{a:'middle',size:11});
+ return{svg:o,note:s.t>=99.5?'<b>Skalvet!</b> Förskalven blev allt tätare och radonhalten steg.':`${Math.round(d)} dagar kvar: förskalven kommer allt tätare, radonhalten stiger och djuren blir oroliga.`}}});
+
+/* 23 Vittring */
+add({id:'vittring',ch:2,title:'Vittring',pages:'s. 71–72',
+controls:[{k:'m',type:'seg',label:'Typ',val:'frost',opts:[['sol','Solsprängning'],['frost','Frostsprängning'],['kem','Kemisk vittring']]},{k:'t',label:'Tid',min:0,max:100,val:40,fmt:v=>Math.round(v*3.6)+' dygn',play:1}],
+facts:['<b>Exogena</b> (yttre) krafter jämnar ut jordytan: vittring, erosion genom rinnande vatten, is, vågor och vind, massrörelser och levande varelser. Många kan bli resurser, t.ex. vattenkraft.','<b>Mekanisk vittring</b> är av två slag: solsprängning och frostsprängning.','<b>Solsprängning</b> i varma ökenklimat: berget utvidgas i solvärmen och kyls snabbt på natten. Sprickor bildas och saltkristaller tänjer ut dem. Ofta blir det <b>skalvittring</b>.','<b>Frostsprängning</b> är vanligast i Sverige: vatten i sprickor fryser till is, utvidgar sig och spränger loss bitar. Materialet bildar <b>rasbranter</b>.','<b>Kemisk vittring</b>: regnvatten + luftens koldioxid → <b>kolsyra</b> som löser bl.a. kalksten. Sura luftföroreningar förstärker. Grottor bildas med <b>stalaktiter</b> (från taket) och <b>stalagmiter</b> (från golvet).'],
+draw(s){const t=s.t/100,m=s.m;let o='';
+ if(m==='kem'){o+=R(0,0,600,320,'sky')+R(0,90,600,230,'kalk');const r=rng(6);for(let k=0;k<40;k++){const x=r()*600,y=(r()*90+t*500)%90;o+=L(x,y,x-3,y+8,'water',1.5)}
+  const cw=20+t*170,ch=10+t*70;o+=E(300,210,cw,ch,'rockdark');
+  if(t>.4){const g=sm(.4,1,t);for(let k=-3;k<=3;k++){const x=300+k*cw/4.5,yt=210-ch*Math.sqrt(1-(k/4.2)**2);o+=PG([[x-4,yt],[x+4,yt],[x,yt+22*g]],'kalk');const yb=210+ch*Math.sqrt(1-(k/4.2)**2);o+=PG([[x-5,yb],[x+5,yb],[x,yb-18*g]],'kalk')}}
+  o+=T(20,30,'regn + koldioxid → kolsyra',{b:1})+T(20,120,'kalksten',{c:'onlight',b:1});
+  return{svg:o,note:t<.4?'Kolsyrahaltigt vatten <b>löser upp kalkstenen</b> och ett hålrum växer.':'En grotta har bildats. Kalk fälls ut och bildar <b>stalaktiter</b> från taket och <b>stalagmiter</b> från golvet.'}}
+ if(m==='sol'){const ph=(t*6)%1,day=ph<.5;o+=R(0,0,600,320,day?'sky':'night')+R(0,250,600,70,'sand');
+  o+=day?C(80+ph*2*440,60,22,'coreout'):C(80+(ph-.5)*2*440,60,16,'snow',{op:.8});
+  o+=PG([[150,250],[170,140],[260,110],[380,120],[450,170],[460,250]],'st2',{s:'onlight',w:1});
+  const dep=20+t*110;o+=PL([[300,114],[292,114+dep*.4],[305,114+dep*.7],[298,114+dep]],'onlight',1+t*4);
+  const r=rng(12);for(let k=0;k<Math.round(t*12);k++)o+=R(296+(r()-.5)*8,118+r()*dep*.9,3,3,'snow');
+  if(t>.6){const g=sm(.6,1,t);o+=PA(`M180 ${140-8*g} Q 220 ${118-10*g} 255 ${112-8*g}`,null,{s:'st2',w:5,op:.9})}
+  o+=T(20,30,day?'Dag: berget utvidgas':'Natt: snabb avkylning',{b:1,c:day?'ink':'ondark'});
+  return{svg:o,note:`Dag och natt växlar. Sprickan växer och <b>saltkristaller</b> tänjer ut den.${t>.6?' Tunna flak lossnar: <b>skalvittring</b>.':''}`}}
+ const ph=(t*8)%1,frz=ph>.5;o+=R(0,0,600,320,'sky')+R(0,270,600,50,'grass',{op:.6});
+ o+=PG([[0,40],[330,40],[340,120],[360,270],[0,270]],'rock',{s:'onlight',w:1});
+ const off=t>.7?sm(.7,.95,t):0,chunk=[[330,60],[352,60],[360,120],[340,118]];
+ o+=PG(chunk.map(p=>[p[0]+off*60,p[1]+off*190]),'rock',{s:'onlight',w:1});
+ if(off<.05)o+=L(331,60,340,118,frz?'ice':'water',4+t*4);
+ const pile=t*40;o+=PG([[340,270],[370,270-pile],[430,270]],'rock',{s:'onlight',w:.8});
+ if(frz&&off<.05)o+=AR(320,90,300,90,'cold',1.6)+AR(350,90,372,90,'cold',1.6);
+ o+=T(20,30,frz?'Vattnet fryser och utvidgar sig':'Isen smälter, vatten rinner in',{b:1});o+=T(400,262,'rasbrant',{size:12,b:1});
+ return{svg:o,note:off>0?'Biten har sprängts loss och rasat ner. Materialet samlas i en <b>rasbrant</b> vid foten.':'Vatten i sprickan fryser till is, <b>utvidgar sig</b> och vidgar sprickan lite varje gång.'}}});
+
+/* 24 Rinnande vatten */
+add({id:'rinnande',ch:2,title:'Rinnande vatten',pages:'s. 72',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:0,fmt:v=>v<30?'unga berg':v<80?'nötning':'peneplan',play:1},{k:'v',label:'Hastighet',min:0,max:100,val:70,fmt:v=>v<30?'lugnt':v<70?'måttligt':'forsande'}],
+facts:['Rinnande vatten (<b>vattenerosion</b>) är den <b>starkaste exogena kraften</b>. Det nöter med hjälp av stenar och material som det för med sig.','Ju större hastighet, desto större <b>transport- och erosionsförmåga</b>. På slätter avtar hastigheten och materialet <b>ackumuleras</b> (avlagras).','Vid låglänta kuster bildas <b>deltan</b> om tidvattnet inte är för starkt.','Mest material för <b>Ganges-Brahmaputra</b> (1 670 milj. ton/år) och <b>Amazonfloden</b> (900 milj. ton/år).','Vattnet eroderar så länge det finns nivåskillnader. Till sist återstår ett <b>peneplan</b>, t.ex. Västgötaslättens urbergsyta och det inre av Småland.'],
+draw(s){const t=s.t/100,v=s.v/100,H=170*(1-.86*t);let o=R(0,0,600,320,'sky');
+ const prof=X=>X>500?262+(X-500)*.2:258-H*(.75*G((X-120)/70)+.95*G((X-300)/65)+.5*G((X-420)/45))*(1+.12*Math.sin(X/11))-(500-X)*.03;
+ o+=PG([...curve(prof,0,600,4),[600,320],[0,320]],'rock')+R(500,262,100,58,'sea',{op:.85});
+ const lv=258-14*t;
+ o+=PG([...curve(X=>Math.min(prof(X),lv),0,500,4),...curve(prof,0,500,4).reverse()],'grass',{op:.95});
+ const dl=10+t*90;o+=PG([[498,262],[498+dl,263],[498,272]],'grass');
+ const riv=curve(X=>Math.min(prof(X),lv)-2,200,500,10);o+=PL(riv,'water',2+v*3);
+ const r=rng(8);for(let k=0;k<Math.round(4+v*16);k++){const p=along(riv,(r()*plen(riv)+t*600*v)%plen(riv));o+=C(p[0],p[1]-2,1+v*3,'rockdark')}
+ return{svg:o,note:`${v>.6?'Forsande vatten river med sig <b>stora stenar</b> och eroderar kraftigt.':v>.3?'Vattnet för med sig grus och sand.':'Lugnt vatten orkar bara bära fint material – resten <b>ackumuleras</b>.'} ${t>.8?'Bergen har nötts ner till ett <b>peneplan</b>.':'Gröna partier = material som transporterats och lagrats, och ett <b>delta</b> växer vid kusten.'}`}}});
+
+/* 25 Glaciärer */
+add({id:'glaciarer',ch:2,title:'Glaciärer',pages:'s. 73',
+controls:[{k:'t',label:'Antal år',min:0,max:100,val:30,fmt:v=>Math.round(v*10)+' år',play:1}],
+facts:['Det svenska landskapet är till stor del format av <b>inlandsisen</b> under senaste istiden.','En inlandsis bildas när det faller <b>mer snö på vintern än som smälter på sommaren</b>.','Snön packas till is, som sakta flyter som tjock <b>"sirap"</b> i dalgångar ner mot lägre områden. Glaciärerna växer ihop till en jättelik inlandsis.','Isen <b>skrapar</b> markytan och för med sig den sönderkrossade berggrunden.','Jordarten som bildas på detta sätt kallas <b>morän</b>.'],
+draw(s){const t=s.t/100;let o=R(0,0,600,320,'sky');const g=X=>70+X*.36+10*Math.sin(X/40);
+ o+=PG([...curve(g,0,600,5),[600,320],[0,320]],'rock');
+ const len=90+t*400,th=18+t*40;o+=PG([...curve(X=>g(X)-th*Math.pow(cl(1-X/len),.55),0,len,5),...curve(g,0,len,5).reverse()],'ice',{s:'cold',w:1});
+ const r=rng(14);for(let k=0;k<18;k++){const x=((r()*len)+t*300)%Math.max(30,len);o+=PG([[x,g(x)-3],[x+5,g(x)-6],[x+7,g(x)-1]],'rockdark')}
+ const mp=t*26;o+=PG([[len-10,g(len)],[len+12,g(len)-mp*.6],[len+40,g(len+40)]],'moran');
+ o+=R(430,18,150,70,'panel',{rx:5,s:'line',w:1})+T(440,38,'snöfall',{size:11})+R(495,30,75*.9,8,'cold')+T(440,58,'smältning',{size:11})+R(495,50,75*.6,8,'hot')+T(440,78,'→ isen växer',{size:11,b:1});
+ o+=T(Math.min(len,520),g(Math.min(len,520))+30,'morän',{a:'middle',b:1,c:'ondark'})+T(40,50,'is flyter som sirap →',{size:12,b:1});
+ return{svg:o,note:`Mer snö faller än som smälter, så isen <b>växer och flyter</b> nedåt. Den skrapar loss berggrund och lägger av <b>morän</b> framför sig.`}}});
+
+/* 26 Vågor */
+add({id:'vagor',ch:2,title:'Vågor',pages:'s. 73',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:30,fmt:pct,play:1}],
+facts:['Havsvågorna (<b>vågerosion</b>) har en oerhörd kraft. Vågkraftverk längs några mil av norska kusten skulle kunna försörja hela Norden med el.','Vågorna spolar bort löst material och verkar som en <b>murbräcka</b> på klipporna. Därför bryts klippkuster ner ganska snabbt.','På andra ställen kastar vågorna upp material till <b>strandvallar och sandstränder</b>.','Vågornas eroderande kraft kallas <b>abrasion</b>. Algarvekusten i Portugal är en typisk abrasionskust.'],
+draw(s){const t=s.t/100,cx=360-t*170,sea=200;let o=R(0,0,600,320,'sky')+R(0,sea,600,120,'sea');
+ o+=PG([[0,120],[cx,120],[cx+5,sea-10],[cx-18*t-6,sea+4],[cx+8,sea+18],[cx+30,300],[0,300]],'st1',{s:'onlight',w:1});
+ if(t>.4){const g=sm(.4,.8,t);o+=PG([[372,sea+2],[376,sea-60*g],[396,sea-55*g],[402,sea+2]],'st1',{s:'onlight',w:1})}
+ o+=R(0,300,600,20,'sand');const r=rng(15);for(let k=0;k<Math.round(t*25);k++)o+=C(cx+20+r()*120,295-r()*10,2+r()*3,'rock');
+ o+=PL(curve(X=>sea-4*Math.sin(X/18+t*40),cx,600,6),'snow',2);
+ o+=AR(560,sea-14,cx+40,sea-14,'snow',2.5)+T(470,sea+40,'vågor',{a:'middle',b:1,c:'ondark'});
+ if(t>.5)o+=T(386,sea-70,'kvarstående klippa',{a:'middle',size:11});
+ return{svg:o,note:`Vågorna slår som en murbräcka mot klippan och nöter bort den: <b>abrasion</b>. Kusten har dragit sig tillbaka ${Math.round(t*170/1.7)} m i modellen.`}}});
+
+/* 27 Vindar */
+add({id:'vindar',ch:2,title:'Vindar',pages:'s. 73',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:30,fmt:pct,play:1}],
+facts:['Vindarna för med sig lättare material. <b>Dyner</b> bildas där materialet ackumuleras (lagras).','Vindburet material verkar <b>slipande</b> på klippor och ger dem fantastiska former.','Mest påtaglig i <b>öknarna</b>, men finns även där det finns finkorniga jordar.','Erosionen är kraftigast <b>längs marken</b>. Det ger pelare med <b>svampliknande form</b>, som liknar Gotlands raukar.'],
+draw(s){const t=s.t/100,gw=140*(1-.72*t),tw=140*(1-.15*t);let o=R(0,0,600,320,'sky')+R(0,250,600,70,'sand');
+ o+=PG([[240-gw/2+60,250],[240-tw/2+60,170],[240+tw/2+60,170],[240+gw/2+60,250]],'st2',{s:'onlight',w:1});
+ o+=E(300,150,105,38,'st2',{s:'onlight',w:1});
+ const dx=470+t*70;o+=PA(`M${dx-90} 250 Q ${dx} 190 ${dx+25} 212 L ${dx+50} 250Z`,'sand',{s:'clay',w:1});
+ const r=rng(16);for(let k=0;k<50;k++){const x=(r()*600+t*900)%600,y=244-r()*r()*40;o+=C(x,y,1.4,'clay')}
+ o+=AR(40,225,140,225,'ink')+T(40,215,'vind med sand',{size:12,b:1})+T(dx-10,276,'dyn',{a:'middle',b:1,c:'onlight'});
+ return{svg:o,note:`Sanden slipar mest <b>nära marken</b>, så foten smalnar (${Math.round(gw)} enheter bred) medan toppen är kvar: en <b>svampform</b>.`}}});
+
+/* 28 Ras och skred */
+add({id:'rasskred',ch:2,title:'Ras och skred',pages:'s. 74',
+controls:[{k:'m',type:'seg',label:'Typ',val:'skred',opts:[['ras','Stenras'],['skred','Skred']]},{k:'t',label:'Regn / tid',min:0,max:100,val:30,fmt:pct,play:1}],
+facts:['Jordens <b>tyngdkraft</b> gör att det borteroderade materialet rör sig nedåt: <b>massrörelser</b>.','I bergsbranter uppstår <b>stenras</b>, och då bildas <b>rasbranter</b>.','<b>Skred</b> uppstår i lösa jordlager när materialet rör sig längs en eller flera <b>glidytor</b>.','Lager med <b>lerjord som innehåller mycket vatten</b> kan fungera som glidytor.','Ex: E6:an genom <b>Munkedal i Bohuslän</b> raserades efter ett skred <b>2006</b>, efter ihållande regn.'],
+draw(s){const t=s.t/100;let o=R(0,0,600,320,'sky');
+ if(s.m==='ras'){o+=PG([[0,40],[260,40],[280,280],[0,280]],'rock',{s:'onlight',w:1})+R(0,280,600,40,'grass',{op:.6});
+  const pile=t*70;o+=PG([[270,280],[290,280-pile],[300+pile*1.6,280]],'rock',{s:'onlight',w:.8});
+  const r=rng(17);for(let k=0;k<6;k++){const u=cl(t*3-k*.4),x=265+u*(30+k*15),y=lerp(60+k*30,270-pile*.4,u*u);if(u>0&&u<1)o+=R(x,y,9,8,'rockdark')}
+  o+=T(330,270-pile,'rasbrant',{b:1});
+  return{svg:o,note:'Stenar lossnar från bergsbranten och rasar ner. Vid foten byggs en <b>rasbrant</b> upp.'}}
+ const sat=t,sl=sm(.6,.95,t)*95;const r=rng(18);for(let k=0;k<Math.round(t*40);k++){const x=r()*600,y=r()*120;o+=L(x,y,x-3,y+8,'water',1.4)}
+ const gnd=X=>110+X*.25;o+=PG([[0,gnd(0)+40],[600,gnd(600)+40],[600,320],[0,320]],'clay')+PG([[0,gnd(0)+40],[600,gnd(600)+40],[600,gnd(600)+52],[0,gnd(0)+52]],'water',{op:sat*.7});
+ o+=PG([[0,gnd(0)],[180,gnd(180)],[180,gnd(180)+40],[0,gnd(0)+40]],'moran');
+ const dx=sl,dy=sl*.25;o+=`<g transform="translate(${n(dx)} ${n(dy)})">`+PG([[180,gnd(180)],[600,gnd(600)],[600,gnd(600)+40],[180,gnd(180)+40]],'moran',{s:'onlight',w:1})+R(300,gnd(300)-6,90,6,'rockdark')+R(450,gnd(450)-24,40,24,'panel',{s:'ink',w:1})+PG([[446,gnd(450)-24],[470,gnd(450)-40],[494,gnd(450)-24]],'accent')+`</g>`;
+ o+=R(120,gnd(120)-6,60,6,'rockdark')+T(20,gnd(20)+70,'lera med mycket vatten = glidyta',{size:12,c:'onlight',b:1});
+ return{svg:o,note:sl>1?'<b>Skred!</b> Det blöta lerlagret blev en glidyta och jordlagret med vägen gled iväg – som E6:an vid Munkedal 2006.':`Regnet gör leran allt blötare (${Math.round(sat*100)} %). Snart kan den fungera som <b>glidyta</b>.`}}});
+
+/* 29 Nedslag från rymden */
+add({id:'nedslag',ch:2,title:'Nedslag från rymden',pages:'s. 74',
+controls:[{k:'t',label:'Nedslag',min:0,max:100,val:0,fmt:pct,play:1},{k:'c',type:'seg',label:'Jämför',val:'chi',opts:[['met','Meteor Crater 1,2 km'],['chi','Chicxulub ca 200 km'],['sud','Sudbury ca 200 km']]}],
+facts:['Meteoritnedslag har förändrat landformerna, särskilt under äldre geologiska perioder.','Jordklotet har träffats av <b>minst 25 000</b> större meteoriter på <b>4 miljarder år</b>. De flesta i haven.','Varje dygn faller ca <b>10 ton</b> material från rymden.','Spår finns av ca <b>200 kratrar</b>. De största är upp till <b>200 km</b>: <b>Chicxulub</b> (Yucatánhalvön, Mexiko) och <b>Sudbury</b> (Kanada).','<b>Meteor Crater</b> i Arizona är bara <b>1,2 km</b> i diameter men syns tydligt i öknen.'],
+draw(s){const t=s.t/100;let o=R(0,0,360,320,'sky')+R(0,220,360,100,'sand');
+ if(t<.4){const u=t/.4;o+=L(20+u*150,10+u*200,8+u*150,u*200-4,'accent',3,{op:.6})+C(20+u*160,10+u*205,8,'rockdark')}
+ else{const g=sm(.4,.7,t),R0=110*g;o+=PA(`M${180-R0} 220 Q 180 ${220+R0*.45} ${180+R0} 220Z`,'clay');o+=PG([[180-R0-20,220],[180-R0,220-12*g],[180-R0+8,220]],'sand')+PG([[180+R0-8,220],[180+R0,220-12*g],[180+R0+20,220]],'sand');
+  if(t<.6){const f=1-sm(.4,.6,t);o+=C(180,210,60*f+10,'coreout',{op:f})}}
+ o+=R(372,10,220,300,'panel',{rx:6,s:'line',w:1})+T(482,32,'Storlek i jämförelse',{a:'middle',b:1,size:12});
+ o+=C(482,160,95,'clay',{s:s.c!=='met'?'accent':'line',w:s.c!=='met'?3:1,op:.85})+T(482,165,'ca 200 km',{a:'middle',b:1,c:'onlight'})+C(482,240,1.2,'ink')+L(482,240,530,280,'ink',1)+T(530,296,'1,2 km',{a:'middle',b:s.c==='met',size:12,c:s.c==='met'?'accent':'ink'});
+ const nm={met:'<b>Meteor Crater</b> i Arizona: bara 1,2 km – en liten prick bredvid de största.',chi:'<b>Chicxulub</b> på Yucatánhalvön i Mexiko: ca 200 km i diameter.',sud:'<b>Sudbury</b> i mellersta Kanada: ca 200 km i diameter.'}[s.c];
+ return{svg:o,note:nm}}});
+
+/* 30 Den levande världen */
+add({id:'levande',ch:2,title:'Den levande världen',pages:'s. 74',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:40,fmt:pct,play:1}],
+facts:['Levande varelser är i regel en <b>nedbrytande</b> kraft.','Undantag: <b>korallrev</b> är tvärtom <b>uppbyggande</b>.','Människans insatser är av <b>destruktiv</b> natur, trots alla byggnadskomplex.','Skred och skalv har inträffat vid <b>dammbyggnader</b> och felaktigt placerade stadsdelar där marken inte hållit.'],
+draw(s){const t=s.t/100;let o=R(0,0,300,320,'sea')+R(0,280,300,40,'sand')+R(300,0,300,320,'sky')+R(300,250,300,70,'grass',{op:.6});
+ const r=rng(19);for(let k=0;k<Math.round(t*30);k++){const x=40+r()*220,y=280-Math.floor(k/7)*22-r()*8;o+=E(x,y,14,10,k%3?'st2':'gas',{s:'onlight',w:.6})}
+ o+=T(150,30,'Korallrev byggs upp',{a:'middle',b:1,c:'ondark'});
+ const gap=2+t*28;o+=PG([[340,250],[370,170],[450-gap/2,160],[450-gap/2,250]],'rock',{s:'onlight',w:1})+PG([[450+gap/2,250],[450+gap/2,160],[530,175],[560,250]],'rock',{s:'onlight',w:1});
+ const th=40+t*90;o+=R(447,160-th,6,th,'mud')+C(450,160-th,20+t*30,'forest');o+=PL([[450,160],[452,200],[446,240]],'mud',2+t*4);
+ o+=T(450,30,'Rötter spräcker berget',{a:'middle',b:1});
+ return{svg:o,note:'Till vänster: koraller bygger upp ett rev (<b>uppbyggande</b>). Till höger: trädets rötter vidgar sprickan (<b>nedbrytande</b>).'}}});
+
+/* 31 Isen formade landskapet */
+add({id:'istider',ch:3,title:'Isen formade landskapet',pages:'s. 90',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:82,fmt:v=>v==100?'nu':fmtN(100-v)+' 000 år sedan',play:1}],
+facts:['Vi lever i perioden <b>kvartär</b>, som pågått i <b>2,4 miljoner år</b>. Den har kalla perioder, <b>istider (glacialer)</b>, och varmare <b>mellanistider (interglacialer)</b>.','Det har varit <b>åtta istider</b> under de senaste 800 000 åren.','Senaste istiden började för drygt <b>100 000 år</b> sedan. I Europa nådde iskanten ungefär linjen <b>Hamburg–Berlin</b>, i Nordamerika till trakten av <b>New York</b>.','Under istider finns mildare perioder, <b>interstadialer</b>. Fynd visar att det fanns människor i Skandinavien för upp till 100 000 år sedan.','För <b>18 000 år</b> sedan var det istid i hela Norden. Några tusen år senare var södra Sverige isfritt, och för ca <b>8 000 år</b> sedan var hela Sverige isfritt.','Infruset material hamnade blandat och osorterat på marken. Smältvattnet gav sandområden och <b>rullstensåsar</b>.'],
+draw(s){const ka=100-s.t;let edge;if(ka>=18)edge=170+300*sm(0,1,(100-ka)/82);else if(ka>=8)edge=lerp(470,30,(18-ka)/10);else edge=0;
+ let o=R(0,0,600,320,'sky')+R(0,232,600,88,'grass',{op:.6});
+ const Hm=110*cl((edge-30)/440);
+ if(edge>30)o+=PG([...curve(X=>232-Hm*Math.sqrt(cl(1-((X-170)/(X<170?175:Math.max(1,edge-170)))**2)),0,edge,4),[edge,232],[0,232]],'ice',{s:'cold',w:1});
+ [['Lappland',50],['Ångermanland',170],['Stockholm',290],['Skåne',385],['Hamburg–Berlin',470],['Alperna',570]].forEach(([nm,x])=>o+=L(x,232,x,240,'ink',1)+T(x,256,nm,{a:'middle',size:11.5}));
+ o+=T(20,300,'norr',{size:11,c:'muted'})+T(580,300,'söder',{a:'end',size:11,c:'muted'});
+ if(edge>30)o+=T(170,232-Hm-10,`inlandsis ${Hm>100?'(ca 3 km)':''}`,{a:'middle',b:1});
+ const msg=ka>=60?'Den senaste istiden har börjat. Isen breder ut sig söderut från fjällen.':ka>=18.5?'Isen växer mot sin största utbredning: <b>linjen Hamburg–Berlin</b>.':ka>=17.5?'<b>18 000 år sedan:</b> istid i hela Norden.':ka>=8.5?'Klimatet blir varmare och isen smälter. Några tusen år efter maximum är <b>södra Sverige isfritt</b>.':'<b>Hela Sverige är isfritt</b> (sedan ca 8 000 år).';
+ return{svg:o,note:msg}}});
+
+/* 32 Former i naturen */
+add({id:'former',ch:3,title:'Former i naturen',pages:'s. 93',
+controls:[{k:'t',label:'Isen smälter',min:0,max:100,val:0,fmt:pct,play:1},{k:'h',type:'seg',label:'Visa',val:'all',opts:[['all','Alla'],['ero','Glacial erosion'],['ack','Ackumulation']]}],
+facts:['Inlandsisen och dess smältvatten har lämnat tydliga spår i vår natur.','<b>Glacial erosion</b>: former som isen skapat genom att <b>nöta på berggrunden</b>, t.ex. rundhällar.','<b>Ackumulation</b>: former av löst material som is och smältvatten <b>transporterat och avlagrat</b>, t.ex. morän, moränryggar, flyttblock, rullstensåsar och varvig lera.','Moränen är oftast mager. Varvig lera ger <b>bördiga lerslätter</b>.'],
+draw(s){const t=s.t/100,h=s.h;let o=R(0,0,600,320,'sky');const bed=X=>250-28*G((X-80)/40)+8*Math.sin(X/30);
+ o+=PG([...curve(bed,0,600,5),[600,320],[0,320]],'rock');
+ o+=PG([...curve(X=>bed(X)-7,140,460,5),...curve(bed,140,460,5).reverse()],'moran');
+ o+=PG([[150,bed(150)-7],[180,bed(180)-26],[210,bed(210)-7]],'moran',{s:'onlight',w:.6});
+ o+=E(265,bed(265)-15,13,9,'rockdark');
+ o+=PA(`M340 ${n(bed(340)-7)} Q 380 ${n(bed(380)-48)} 420 ${n(bed(420)-7)}Z`,'gravel',{s:'onlight',w:.6});
+ for(let i=0;i<4;i++)o+=R(470,bed(470)-22+i*5.5,130,5.5,i%2?'clay':'kalk');
+ if(t>.75){const g=sm(.75,1,t);[160,230,300,330].forEach(x=>o+=`<g opacity="${g}">${tree(x,bed(x)-7,26)}</g>`)}
+ const edge=600-t*640;if(edge>0)o+=R(0,60,edge,bed(0)-60+40,'ice',{op:.88,s:'cold',w:1});
+ const F=[['rundhäll',80,'ero'],['moränrygg',180,'ack'],['flyttblock',265,'ack'],['morän',305,'ack'],['rullstensås',380,'ack'],['varvig lera',535,'ack']];
+ F.forEach(([nm,x,k])=>{const on=h==='all'||h===k;o+=T(x,bed(x)-(nm==='rullstensås'?58:nm==='moränrygg'?36:28),nm,{a:'middle',size:12,b:on,c:on?(k==='ero'?'cold':'accent'):'muted',op:on?1:.5})});
+ return{svg:o,note:edge>0?'Isen täcker fortfarande en del av landskapet. Dra vidare så ser du vad den lämnat efter sig.':h==='ero'?'<b>Glacial erosion</b>: rundhällen har slipats av isen.':h==='ack'?'<b>Ackumulation</b>: morän, moränrygg, flyttblock, rullstensås och varvig lera är material som isen och smältvattnet lagt av.':'Så här ser samma landskap ut idag.'}}});
+
+/* 33 Rundhällar */
+const RH0=[[90,250],[130,205],[165,218],[200,170],[240,186],[270,150],[310,172],[350,140],[385,176],[420,166],[460,250]],RH1=[[90,250],[150,218],[205,186],[255,162],[300,148],[340,144],[368,150],[384,180],[398,188],[414,222],[460,250]];
+add({id:'rundhallar',ch:3,title:'Rundhällar',pages:'s. 94',
+controls:[{k:'t',label:'Isen rör sig',min:0,max:100,val:40,fmt:pct,play:1}],
+facts:['Rundhällar är ett av inlandsisens <b>vanligaste spår</b> och finns överallt i Sverige.','De bildades när isen rörde sig över en uppstickande del av berggrunden.','<b>Stötsidan</b>, där isen gled upp, slipades <b>rund och jämn</b>.','<b>Läsidan</b> är <b>skrovlig och brant</b>. Vatten rann ner i sprickor, frös (frostsprängning) och isen tog bitar ur berget.','<b>Isräfflor</b> repades in i stötsidan av fastfrusna stenar. De visar isens rörelseriktning. Tydligast vid kusterna.'],
+draw(s){const t=s.t/100;let o=R(0,0,600,320,'sky')+R(0,250,600,70,'rock');
+ const P=RH0.map((p,i)=>[lerp(p[0],RH1[i][0],t),lerp(p[1],RH1[i][1],t)]);o+=PG(P,'rock',{s:'onlight',w:1.2});
+ for(let k=0;k<6;k++){const u=.15+k*.12,a=along(P.slice(0,6),u*plen(P.slice(0,6)));o+=L(a[0]-10,a[1]+4,a[0]+10,a[1]-2,'onlight',1,{op:t*.9})}
+ o+=PG([[0,30],[600,30],[600,110],[460,110],[400,125],[300,128],[200,140],[100,180],[0,200]],'ice',{op:.55,s:'cold',w:1});
+ const r=rng(21);for(let k=0;k<6;k++){const x=(k*110+t*400)%600;o+=R(x,100+r()*20,6,6,'rockdark')}
+ if(t>.5){const g=sm(.5,1,t);for(let k=0;k<3;k++)o+=R(410+g*60+k*28,190-k*18-g*30,9,8,'rock',{s:'onlight',w:.8})}
+ o+=AR(40,70,180,70,'cold')+T(40,58,'isens rörelseriktning',{size:12,b:1})+T(180,270,'stötsida: slät, med räfflor',{a:'middle',size:12,b:1,c:'onlight'})+T(430,282,'läsida: brant, skrovlig',{a:'middle',size:12,b:1,c:'onlight'});
+ return{svg:o,note:'Isen kommer från vänster. <b>Stötsidan</b> slipas jämn och får isräfflor. På <b>läsidan</b> plockar isen loss block, så den blir brant och skrovlig.'}}});
+
+/* 34 U-dalar och fjordar */
+add({id:'udalar',ch:3,title:'U-dalar och fjordar',pages:'s. 94',
+controls:[{k:'t',label:'Isens erosion',min:0,max:100,val:0,fmt:pct,play:1},{k:'f',type:'seg',label:'Plats',val:'fj',opts:[['fj','Fjällen'],['no','Norska kusten']]}],
+facts:['I fjällen syns isens spår tydligt – inga skogar <b>"skymmer sikten"</b>.','Bergsområden har ofta <b>V-formade</b> dalar. I våra fjäll har de istället formen av ett <b>U</b>.','När isen rörde sig genom en dalgång nötte den på dalsidorna och plockade med sig block och stenar: en <b>U-dal</b>.','U-dalar kallas ibland <b>"dörrar"</b> in i fjällvärlden. Mest känd: <b>Lapporten</b> i Abisko, norra Lappland.','Vid norska kusten breddade och fördjupade isen dalarna till <b>fjordar</b>: samma form som U-dalar men betydligt djupare.'],
+draw(s){const t=s.t/100,fj=s.f==='no',deep=fj?55:0;let o=R(0,0,600,320,'sky');
+ const V=X=>60+(1-Math.abs(X-300)/300)*190,U=X=>{const u=Math.abs(X-300)/240;return u>=1?60:60+(210+deep)*(1-Math.pow(u,4))};
+ const prof=X=>lerp(V(X),U(X),t);
+ o+=R(0,0,600,320,'rock')+PG([[0,0],[600,0],...curve(prof,0,600,4).reverse()],'sky');
+ if(t>0&&t<1)o+=PG([...curve(X=>Math.min(prof(X),130),40,560,4),...curve(prof,40,560,4).reverse()],'ice',{op:.55});
+ if(fj)o+=PG([...curve(X=>Math.min(prof(X),190),0,600,4).map(p=>[p[0],190]),...curve(X=>Math.max(prof(X),190),0,600,4).reverse()],'sea',{op:.9});
+ o+=PL(curve(V,0,600,6),'ink',1,{dash:'5 4',op:.4});
+ o+=T(300,24,t<.3?'V-dal':fj?'Fjord':'U-dal',{a:'middle',b:1,size:16})+T(560,40,'streckat = före',{a:'end',size:11,c:'muted'});
+ return{svg:o,note:t<.3?'En vanlig <b>V-formad</b> dal i ett bergsområde.':fj?'Vid norska kusten har isen breddat och <b>fördjupat</b> dalen. Havet har fyllt den: en <b>fjord</b>.':'Isen har nött dalsidorna och dalen har fått formen av ett <b>U</b>, som Lapporten i Abisko.'}}});
+
+/* 35 Morän */
+const STN=(()=>{const r=rng(31),a=[];for(let i=0;i<70;i++){const x=40+r()*520,y=80+r()*165,sz=3+r()*r()*16,ty=232+r()*16;a.push([x,y,sz,ty,r()*6.28])}return a})();
+add({id:'moran',ch:3,title:'Morän',pages:'s. 95',
+controls:[{k:'t',label:'Isen smälter',min:0,max:100,val:30,fmt:pct,play:1}],
+facts:['Inlandsisen var ca <b>3 km tjock</b> i sina centrala delar, i dagens <b>Ångermanland</b>.','Därifrån rörde den sig främst mot <b>söder och sydost</b>. Block och stenar krossades och maldes sönder.','När isen smälte hamnade materialet som ett jordtäcke: <b>morän</b>.','I morän ligger materialet <b>blandat och osorterat</b>, och stenarna är <b>kantiga</b> eftersom de varit infrusna i isen.','Morän är Sveriges <b>vanligaste jordart</b> och täcker <b>tre fjärdedelar</b> av landet. Mest hårt urberg → näringsfattig mark → <b>tall- och granskog</b>.'],
+draw(s){const t=s.t/100,top=lerp(60,252,t);let o=R(0,0,600,320,'sky')+R(0,250,600,70,'rock');
+ if(t>.5)o+=R(0,232,600,18,'moran',{op:sm(.5,1,t)});
+ if(top<250)o+=R(20,top,560,250-top,'ice',{op:.85,s:'cold',w:1});
+ STN.forEach(([x,y,sz,ty,a])=>{const yy=y<top?lerp(y,ty,sm(0,1,(top-y)/60)):y;const pts=[0,1.9,3.2,4.6].map(q=>[x+sz*Math.cos(a+q),yy+sz*.8*Math.sin(a+q)]);o+=PG(pts,'rockdark')});
+ if(t>.85){const g=sm(.85,1,t);[60,110,170,230,300,370,440,520].forEach((x,i)=>o+=`<g opacity="${g}">${tree(x,232,30+(i%3)*8)}</g>`)}
+ o+=R(470,12,120,74,'panel',{rx:6,s:'line',w:1})+PA('M510 49 L510 25 A24 24 0 1 1 486 49Z','moran')+C(510,49,24,null,{s:'ink',w:1})+T(545,46,'3/4',{b:1,size:14})+T(545,62,'av Sverige',{size:10});
+ return{svg:o,note:t<.95?'Isen smälter uppifrån. Stenar och block av alla storlekar faller ner <b>huller om buller</b> – osorterat och kantigt.':'Kvar är ett jordtäcke av <b>morän</b>. Där växer främst tall- och granskog.'}}});
+
+/* 36 Rullstensåsar */
+add({id:'rullstensasar',ch:3,title:'Rullstensåsar',pages:'s. 96',
+controls:[{k:'g',type:'seg',label:'Vy',val:'b',opts:[['b','Bildning'],['x','Genomskärning']]},{k:'t',label:'Tid',min:0,max:100,val:40,fmt:pct,play:1}],
+facts:['Rullstensåsar slingrar sig genom hela Sverige och är ett av de <b>tydligaste spåren</b> efter istiden.','Oftast <b>15–25 m</b> höga, ibland över <b>40 m</b>. Vanligast i Mellansverige.','<b>Uppsalaåsen</b> är längst: <b>20 mil</b> från Södermanland över Mälaren och Uppland ut i Bottenhavet.','Smältvatten rann som stora älvar i <b>tunnlar</b> mellan isen och berggrunden. Stenarna rullade och nöttes <b>runda</b>.','Materialet är <b>sorterat</b>: största stenarna i botten, grus och sand högre upp. Växlande lager visar vårflod och lugnare vinterflöden.','Grus och sand är en viktig <b>naturresurs</b> för vägbyggen: grustag finns i åsarna.'],
+draw(s,id){const t=s.t/100;let o=R(0,0,600,320,'sky');
+ if(s.g==='x'){o+=R(0,260,600,60,'rock');o+=`<clipPath id="${id}a"><path d="M80 260 Q300 40 520 260Z"/></clipPath><g clip-path="url(#${id}a)">`;
+  const lay=[[260,225,'b'],[225,195,'g'],[195,180,'s'],[180,160,'g'],[160,145,'s'],[145,120,'g'],[120,95,'s']];const r=rng(22);
+  lay.forEach(([y0,y1,k],i)=>{if(t<i/lay.length)return;o+=R(0,y1,600,y0-y1,k==='b'?'rock':k==='g'?'gravel':'sand');const rr=k==='b'?9:k==='g'?3.2:1.2;for(let j=0;j<(k==='b'?40:k==='g'?160:300);j++)o+=C(80+r()*440,y1+r()*(y0-y1),rr*(.7+r()*.5),k==='b'?'rockdark':'clay',{op:.8})});
+  o+=`</g>`+PA('M80 260 Q300 40 520 260',null,{s:'ink',w:1.5});
+  o+=T(540,250,'stora rullstenar',{size:11})+T(540,205,'grus',{size:11})+T(540,170,'sand',{size:11})+T(300,30,'15–25 m hög (ibland > 40 m)',{a:'middle',b:1,size:12});
+  return{svg:o,note:'Åsen är <b>sorterad</b>: de största stenarna ligger i botten. Högre upp växlar grus och sand, från vårflodens forsande vatten och lugnare vinterflöden.'}}
+ const edge=560-t*400;o+=R(0,250,600,70,'rock')+R(edge,190,600-edge,60,'sea',{op:.7});
+ o+=PA(`M${n(edge)} 250 L ${n(edge)} 250 L 560 250 L 560 250 Q ${n((edge+560)/2)} 210 ${n(edge)} 250Z`,'gravel');
+ o+=PG([[0,40],[edge,60],[edge,250],[0,250]],'ice',{op:.85,s:'cold',w:1})+R(0,226,edge,24,'water',{op:.9});
+ const r=rng(23);for(let k=0;k<20;k++){const x=(r()*edge+t*900)%Math.max(20,edge);o+=C(x,236+r()*10,2+r()*4,'rockdark')}
+ o+=AR(40,215,140,215,'cold')+T(40,205,'smältvatten i tunnel',{size:12,b:1});
+ if(t>.15)o+=T((edge+560)/2,200,'rullstensås',{a:'middle',b:1});
+ return{svg:o,note:'Smältvattnet forsar i en tunnel under isen och för med sig sten, grus och sand. Vid mynningen sjunker materialet till botten. När isen smälter undan blir en <b>långsmal ås</b> kvar.'}}});
+
+/* 37 Först landsänkning – sedan landhöjning */
+add({id:'landhojning',ch:3,title:'Först landsänkning – sedan landhöjning',pages:'s. 97',
+controls:[{k:'t',label:'Tid',min:0,max:100,val:0,fmt:v=>v<30?'isen växer':v<45?'isen smälter':v<100?'landhöjning':'idag',play:1}],
+facts:['Där inlandsisen var tjockast pressades jordskorpan ner ca <b>800 meter</b>.','När isen smälte började landet höja sig igen. Störst landhöjning vid <b>Höga kusten</b> i Ångermanland: <b>286 m</b> sedan istiden.','Längs norrlandskusten höjer sig landet fortfarande <b>8 mm per år</b>. I södra Sverige har den nästan upphört.','<b>Piteå</b> anlades <b>1621</b> på en ö. Idag ligger staden <b>en mil inne i landet</b> – marken har höjts mer än tre meter.','<b>Högsta kustlinjen (HK)</b> = den högsta nivå havet nådde efter istiden. Under HK ligger lera och sand – bördiga bygder som Mälardalen, Närke-, Östgöta- och Västgötaslätten. Ovanför HK finns mest näringsfattig morän.','I Skåne består moränen av krossad kalksten: <b>moränlera</b>, Sveriges näringsrikaste jord.'],
+draw(s){const t=s.t,load=sm(0,30,t),melt=sm(30,45,t),reb=sm(45,100,t),sea=170;
+ const D=X=>70*G((X-150)/230),dep=X=>D(X)*load*(1-reb*.96),surf=X=>155+dep(X)+X*.03;
+ let o=R(0,0,600,320,'sky')+R(0,sea,600,150,'sea');
+ o+=PG([...curve(surf,0,600,4),[600,320],[0,320]],'cont');
+ const ice=X=>110*load*(1-melt)*G((X-150)/220);if(load*(1-melt)>.02)o+=PG([...curve(X=>surf(X)-ice(X),0,560,4),...curve(surf,0,560,4).reverse()],'ice',{s:'cold',w:1});
+ if(t>=45)o+=L(0,sea-0,600,sea,'seadeep',1.5);
+ if(t>=45)o+=PL(curve(X=>sea-D(X)*.96*reb,0,Math.min(560,curve(X=>X,0,600,4).find(([X])=>155+D(X)+X*.03<sea)?.[0]??560),8),'accent',1.5,{dash:'5 4'});
+ [['Piteå',60],['Höga kusten',150],['Stockholm',300],['Skåne',520]].forEach(([nm,x])=>o+=C(x,surf(x),3.5,'ink')+T(x,surf(x)-10,nm,{a:'middle',size:11.5,b:1}));
+ o+=T(20,312,'norr',{size:11,c:'ondark'})+T(580,312,'söder',{a:'end',size:11,c:'ondark'});
+ const m=Math.round(286*reb);o+=R(408,12,182,48,'panel',{rx:5,s:'line',w:1})+T(418,32,'Landhöjning vid Höga kusten',{size:11})+T(418,52,`${m} m`,{b:1,size:16,m:1});
+ return{svg:o,note:t<30?'Inlandsisen växer. Dess tyngd <b>trycker ner</b> jordskorpan, mest där isen är tjockast (ca 800 m).':t<45?'Isen smälter. Landet ligger fortfarande nedtryckt och havet tränger in långt.':t<100?'Landet <b>höjer sig</b> igen. Mest vid Höga kusten, nästan inget i Skåne. Streckad linje = ungefär högsta kustlinjen (HK).':'Idag: Höga kusten har höjts <b>286 m</b> och höjs fortfarande 8 mm per år.'}}});
+
+/* ---------- enkla förklaringar ---------- */
+const ELI5={"uppbyggnad":"Jorden är byggd ungefär som ett äpple. Ytterst finns ett tunt skal (jordskorpan), sedan ett tjockt, segt lager (manteln) och längst in ett kärnhus (kärnan). Inne i manteln rör sig het, seg massa sakta runt, ungefär som gröt som kokar i en kastrull: det varma bubblar upp och det svalare sjunker ner igen. Dra i Djup för att resa in mot mitten.",
+"jordskorpan":"Jordskorpan är som skalet på ett äpple – jättetunn jämfört med resten av jorden. Men skalet är inte lika tjockt överallt. Under kontinenterna, särskilt under höga berg, är det tjockt. Under haven är det tunt. Flytta pricken med reglaget och se hur tjockleken ändras.",
+"sammansattning":"Tänk på en tårta i två lager. Det övre lagret (sial) är ljust och lätt, som en sockerkaka. Det undre (sima) är mörkt och tungt, som en chokladbotten. På kontinenterna finns båda lagren, men under haven finns nästan bara den tunga botten. Och nästan hela tårtan är gjord av samma åtta ingredienser – bara 1 % är något annat.",
+"pusselbitar":"Jordskorpan är inte ett enda stycke. Den är som ett pussel med sju stora bitar och ungefär femton små, som ligger och flyter på den sega manteln. Där bitarna stöter ihop eller glider isär skakar det. Därför samlas jordskalven, de röda prickarna, längs kanterna.",
+"plattgranser":"Plattorna kan göra tre saker mot varandra: glida isär, krocka eller gnida förbi varandra. Glider de isär väller ny sten upp i springan, som sylt när man drar isär en smörgås. Krockar de trycks den tyngre plattan ner under den andra, som när två mattor skjuts mot varandra och den ena hamnar under. Gnider de förbi varandra fastnar de och rycker till – ett jordskalv. Testa knapparna.",
+"plattrorelserna":"För jättelänge sedan satt alla kontinenter ihop i en enda stor bit, Pangea. Sedan gick den sönder och bitarna gled sakta isär, bara några centimeter om året. Det har pågått i 200 miljoner år. Dra i reglaget och se hur kartan blir den vi har idag.",
+"wegener":"Alfred Wegener tittade på världskartan och såg att Sydamerika och Afrika passar ihop som två pusselbitar. Han trodde att de en gång suttit ihop. Men nästan ingen trodde på honom, eftersom han inte kunde förklara vad som knuffade iväg kontinenterna. Först på 1960-talet, långt efter hans död, fick han rätt. Skjut ihop bitarna och se om de passar.",
+"forkastningar":"Tänk dig en tårta som du skär i tre bitar. Trycker du upp mittenbiten får du en horst, ett upphöjt block. Trycker du ner den får du en gravsänka, en grop. I naturen händer det vid jordskalv, när marken spricker och blocken flyttar sig. Vättern är en sådan nedsjunken bit.",
+"veckning":"Tänk dig att du lägger en mjuk matta på golvet. Om du sätter händerna på var sin sida och skjuter ihop dem har mattan ingenstans att ta vägen. Den bucklar sig uppåt och blir ett litet berg. Jorden gör samma sak, fast mycket, mycket långsammare. Plattorna puttar på varandra och marken veckas upp till berg. Det tar miljontals år.",
+"isostasi":"Ett berg flyter på manteln ungefär som ett isberg flyter i vattnet. Det mesta av isberget ligger under ytan, och ett högt berg har en lång \"rot\" nedåt. Om toppen nöts bort blir berget lättare och guppar sakta uppåt – precis som ett isberg som smälter ovanifrån. Lägger man något tungt ovanpå, som en inlandsis, trycks det istället ner.",
+"jordskalv":"Ett jordskalv är som när du kastar en sten i en vattenpöl: ringar sprids åt alla håll. Men inne i jorden finns tre sorters ringar. P-vågorna springer fortast. S-vågorna kommer efter och kan inte ta sig genom den flytande kärnan. L-vågorna kryper längs ytan, långsammast men starkast. En seismograf skriver upp när varje sort kommer fram.",
+"richter":"Richterskalan är som en trappa där varje steg är mycket större än det förra. Ett skalv på 6 skakar inte lite mer än ett på 5. Det svänger tio gånger så mycket och släpper ut ungefär 30 gånger så mycket energi. Mercalliskalan mäter istället vad folk märker: skallrar fönstren eller rasar husen? Jämför två skalv med reglagen.",
+"kniptang":"Tänk dig att du klämmer en tub tandkräm med båda händerna. Krämen i mitten har ingenstans att ta vägen och pressas ut åt sidan. I sydvästra Asien trycker Afrika och Indien norrut mot Europa och Asien, och de små plattorna emellan – arabiska, iranska och turkiska – kläms ihop. Turkiska plattan pressas ut västerut. Det ger många jordskalv.",
+"vandrande":"Ibland verkar jordskalven komma i en rad, som dominobrickor som faller. När ett ställe har släppt sin spänning kan nästa ställe längs samma plattgräns ta smällen. 1980–81 vandrade en sådan \"puls\" från Azorerna i väster till Iran i öster. Tryck Spela och följ pulsen.",
+"olja":"Olja är gamla, döda småkryp. För jättelänge sedan levde massor av pyttesmå organismer i ett grunt hav. När de dog sjönk de till botten och täcktes av nya lager. Efter miljontals år hade de blivit olja. Oljan är lätt, så den kryper uppåt och samlas under en kupol av berg, med gas överst, olja i mitten och vatten underst.",
+"hotspots":"Tänk dig att du håller ett papper ovanför ett tänt ljus och sakta drar pappret åt sidan. Ljuset står still men bränner nya prickar i en rad. Så fungerar en het fläck. Den ligger still under havsbotten och smälter fram vulkaner, medan plattan glider förbi. Därför ligger öarna på rad, med de äldsta längst bort.",
+"hetflackar":"En het fläck kan också ligga under en kontinent. Där blir det inga vulkanöar. Istället väller lava upp om och om igen och lägger sig i lager på lager, som pannkakor i en hög. Till slut blir högen ett par kilometer tjock, som Deccan i Indien.",
+"hetakallor":"En gejser är som en kastrull med lock på spisen. Vatten sipprar ner i marken och värms upp av het berggrund. När det blir för varmt och trycket för stort sprutar vattnet och ångan upp ur hålet – pang! Sedan börjar det om.",
+"vulkaner":"Alla vulkanutbrott är inte lika stora. VEI är en skala från 0 till 8, lite som en Richterskala för vulkaner. Vid 0 rinner lavan lugnt ut. Vid 8 är utbrottet så stort att det troligen påverkar hela jorden. Man tittar på hur högt rök- och askpelaren når och hur mycket som kommer ut.",
+"produkter":"En vulkan kan spotta ut många olika saker. Lavan kan vara rinnig som saft (replava) eller seg som kall honung (blocklava). Under vatten stelnar den till runda kuddar. Vulkanen kan också spruta ut pimpsten, som är så full av gasbubblor att den flyter. Den kan släppa heta moln av gas och aska, och lera som rinner ner i dalarna. Testa knapparna.",
+"vulkantyper":"Hur en vulkan ser ut beror på hur seg lavan är. Rinnig lava med lite kvarts rinner långt och bygger en låg, bred vulkan, som en pannkaka. Seg lava med mycket kvarts stannar nära kratern och bygger ett brant berg, som en strut upp och ner. Är lavan både seg och full av vatten kan den täppa till kratern. Då kan vulkanen explodera, som en skakad läskflaska.",
+"overvakning":"Forskare håller hela tiden koll på vulkaner och plattgränser, ungefär som en läkare som lyssnar på hjärtat. Innan ett stort skalv kommer ofta små skakningar, gasen radon ökar i marken och djur som elefanter och fiskar blir oroliga. Märker man tecknen i tid kan man varna människorna.",
+"vittring":"Berg ser starka ut, men de går sönder lite i taget. När vatten fryser till is i en spricka tar isen mer plats och bänder isär berget, som en flaska som spricker i frysen. I öknen blir berget varmt på dagen och kallt på natten tills det spricker. Och regnvatten kan lösa upp kalksten, nästan som socker i te. Testa knapparna.",
+"rinnande":"Rinnande vatten är som ett sandpapper. Floden släpar med sig stenar och sand som slipar på berget. Ju fortare vattnet rinner, desto mer orkar det bära. När det rinner långsamt släpper det sin last, och vid havet bildas ett delta. Efter mycket lång tid har bergen slipats ner till en platt slätt, ett peneplan.",
+"glaciarer":"Om det snöar mer på vintern än som hinner smälta på sommaren blir snön kvar år efter år. Den packas ihop till is, som långsamt rinner nedför backen som tjock sirap. Isen skrapar som en jättelik hyvel och för med sig grus och stenar. Det materialet kallas morän.",
+"vagor":"Vågorna är som en murbräcka som slår mot klippan om och om igen, dag och natt. Bit för bit nöts klippan ner och kusten flyttar sig bakåt. Ibland blir en hårdare bit kvar som en pelare ute i vattnet. Vågornas nötning kallas abrasion.",
+"vindar":"Vinden i öknen är som en blåsmaskin full av sand. Sanden flyger mest nära marken, så den slipar mest på stenens fot. Toppen blir kvar, och till slut ser stenen ut som en svamp. Där sanden lägger sig bildas dyner.",
+"rasskred":"Allt vill ramla neråt på grund av tyngdkraften. Från branta berg kan stenar lossna och rasa ner i en hög. På sluttningar med lera kan regnet göra leran blöt och hal som tvål. Då kan hela marken ovanpå glida iväg, med vägar och hus. Det kallas skred.",
+"nedslag":"Ibland krockar stenar från rymden med jorden. En stor meteorit slår ner som en sten i sand och gör en rund grop, en krater. De flesta har landat i havet eller nötts bort, men vissa syns fortfarande. De största är ungefär 200 km breda, och Meteor Crater i Arizona är bara 1,2 km.",
+"levande":"Växter och djur ändrar också jordytan. Ett träd kan låta sina rötter växa in i en spricka och sakta spräcka berget. Korallerna gör tvärtom: de bygger upp stora rev, bit för bit. Människan förstör oftast mer än vi bygger upp.",
+"istider":"Under de senaste miljonerna år har jorden växlat mellan kalla och varmare perioder, som jättelånga vintrar och somrar. Under den senaste \"vintern\" låg ett jättetjockt istäcke över hela Sverige och ända ner till norra Tyskland. Sedan blev det varmare och isen smälte bort, först i söder och sist i norr. Dra i tiden och se isen växa och krympa.",
+"former":"När isen smälte bort var det som när en bulldozer har kört över landskapet och sedan åkt därifrån. Vissa ställen har den slipat släta (glacial erosion). På andra ställen har den lämnat högar av sten, grus, sand och lera (ackumulation). Dra bort isen och se vad den lämnade.",
+"rundhallar":"Tänk dig att du drar en stor, tung skurborste över en sten. Sidan som borsten möter först blir slät och rund. På baksidan fastnar borsten och rycker loss bitar, så den sidan blir brant och knagglig. Så formade isen rundhällarna. Repen i den släta sidan visar åt vilket håll isen rörde sig.",
+"udalar":"En flod skär ut en smal, V-formad dal, ungefär som när du drar en pinne genom sand. En glaciär är mycket bredare och tyngre, som en stor glass-skopa som skrapar ut dalen. Då blir dalen U-formad. Vid Norges kust skrapade isen ännu djupare, och sedan fyllde havet dalarna: fjordar.",
+"moran":"Tänk dig en gigantisk isglass full av nötter och chokladbitar i alla storlekar. När den smälter faller alltihop ner i en blandad hög, stort och smått huller om buller. Det är morän: stenar, grus och sand helt osorterat. Morän täcker tre fjärdedelar av Sverige.",
+"rullstensasar":"Under isen rann smältvattnet i tunnlar, som vatten i ett rör. Det tog med sig stenar som rullade och blev runda. När isen smälte blev allt som hade samlats i tunneln kvar som en lång, smal ås. Om man gräver i en ås ser man att de största stenarna ligger längst ner och sanden överst.",
+"landhojning":"Tänk dig att du sitter på en madrass. Där du sitter trycks den ner, och när du reser dig kommer den sakta upp igen. Inlandsisen var så tung att den tryckte ner landet, mest där isen var tjockast. När isen smälte började landet resa sig igen. Det håller fortfarande på, åtta millimeter om året längs norrlandskusten."};
+
+/* ---------- bygg sidan ---------- */
+const toc=document.getElementById('innehall'),main=document.getElementById('main');
+CH.forEach((c,ci)=>{const items=S.filter(x=>x.ch===ci);
+ toc.insertAdjacentHTML('beforeend',`<div><h2>${c[0]} <small>${c[1]}</small></h2><ol>${items.map(x=>`<li><a href="#${x.id}">${x.title}</a></li>`).join('')}</ol></div>`);
+ const ch=document.createElement('div');ch.className='chapter';ch.innerHTML=`<div class="ch-h"><h2>${c[0]}</h2><span>${c[1]}</span></div>`;main.appendChild(ch);
+ items.forEach(sec=>ch.appendChild(build(sec)))});
+function build(sec){const s={};sec.controls.forEach(c=>s[c.k]=c.val);
+ const el=document.createElement('section');el.className='sec';el.id=sec.id;
+ el.innerHTML=`<header class="sec-h"><h3>${sec.title}</h3><span class="pg">${sec.pages}</span></header><div class="sec-body"><figure class="stage"><div class="svgbox"></div><figcaption class="note"></figcaption><div class="ctrls"></div></figure><aside class="facts">${ELI5[sec.id]?`<div class="eli5"><h4>Som om du vore fem år</h4><p>${ELI5[sec.id]}</p></div>`:''}<div><h4>Mer utförligt</h4><ul>${sec.facts.map(f=>`<li>${f}</li>`).join('')}</ul></div></aside></div><a class="top" href="#innehall">↑ Till innehållet</a>`;
+ let raf=null,stopBtn=()=>{};function stop(){if(raf)cancelAnimationFrame(raf);raf=null;stopBtn()}
+ const box=el.querySelector('.svgbox'),note=el.querySelector('.note'),ctr=el.querySelector('.ctrls'),inputs={};
+ const redraw=()=>{let r;try{r=sec.draw(s,sec.id)}catch(e){console.error(sec.id,e);return}box.innerHTML=`<svg viewBox="0 0 600 320" role="img" aria-label="${sec.title}">${r.svg}</svg>`;note.innerHTML=r.note||'';
+  Object.entries(inputs).forEach(([k,i])=>{if(i.out)i.out.textContent=i.c.fmt?i.c.fmt(+s[k]):s[k]})};
+ sec.controls.forEach(c=>{const cid=`${sec.id}-${c.k}`;
+  if(c.type==='seg'){const d=document.createElement('div');d.className='seg';d.setAttribute('role','group');d.setAttribute('aria-label',c.label);
+   c.opts.forEach(([v,l,set])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.id=`${cid}-${v||'reset'}`;b.setAttribute('aria-pressed',String(s[c.k]===v&&v!==''));
+    b.onclick=()=>{s[c.k]=v;if(set)Object.entries(set).forEach(([k,val])=>{s[k]=val;if(inputs[k])inputs[k].el.value=val});d.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b&&v!=='')));stop();redraw()};d.appendChild(b)});
+   ctr.appendChild(d);inputs[c.k]={c,seg:d};return}
+  const w=document.createElement('div');w.className='ctl';
+  w.innerHTML=`<label for="${cid}">${c.label}</label><input type="range" id="${cid}" min="${c.min}" max="${c.max}" step="${c.step||1}" value="${c.val}"><output for="${cid}"></output>${c.play?`<button type="button" class="play" aria-pressed="false">▶ Spela</button>`:'<span></span>'}`;
+  const inp=w.querySelector('input');inputs[c.k]={c,el:inp,out:w.querySelector('output')};
+  inp.addEventListener('input',()=>{s[c.k]=+inp.value;clearEp();redraw()});
+  if(c.play){const pb=w.querySelector('.play');pb.onclick=()=>{if(raf){stop();return}if(+inp.value>=c.max-1e-9){s[c.k]=c.min;inp.value=c.min}pb.setAttribute('aria-pressed','true');pb.textContent='❚❚ Paus';let last=null;
+   const step=ts=>{if(last==null)last=ts;const dt=Math.min(64,ts-last);last=ts;let v=+s[c.k]+(c.max-c.min)*dt/5200;if(v>=c.max){v=c.max;s[c.k]=v;inp.value=v;redraw();stop();return}s[c.k]=v;inp.value=v;redraw();raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)};
+   stopBtn=()=>{pb.setAttribute('aria-pressed','false');pb.textContent='▶ Spela'}}
+  ctr.appendChild(w)});
+ function clearEp(){Object.values(inputs).forEach(i=>{if(i.seg&&i.c.opts.some(o=>o[2])){s[i.c.k]='';i.seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'))}})}
+ redraw();return el}
+/* ---------- ljust / mörkt läge ---------- */
+(function(){const root=document.documentElement,btns=[...document.querySelectorAll('.theme button')];
+const cur=()=>root.getAttribute('data-theme')||'auto';
+const mark=t=>btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===t)));
+btns.forEach(b=>b.onclick=()=>{const t=b.dataset.t;if(t==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',t);try{localStorage.setItem('tema',t)}catch(e){}mark(t)});
+mark(cur())})();
+</script>
+</body>
+</html>
